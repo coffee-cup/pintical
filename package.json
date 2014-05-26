@@ -1,0 +1,8 @@
+{
+  "name": "skeleton-node-angular",
+  "main": "server.js",
+  "dependencies": {
+    "express": "latest",
+    "mongoose": "latest"
+  }
+}
