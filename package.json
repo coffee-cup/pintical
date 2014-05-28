@@ -1,8 +1,10 @@
 {
-  "name": "skeleton-node-angular",
-  "main": "server.js",
-  "dependencies": {
-    "express": "latest",
-    "mongoose": "latest"
+  "name"         : "wiki-message",
+  "main"         : "server.js",
+  "description"  : "wiki message application",
+  "author"       : "coffeecup",
+  "dependencies" : {
+    "express"      : "~3.4.4",
+    "mongoose"     : "~3.6.2"
   }
 }

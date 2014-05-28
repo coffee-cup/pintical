@@ -1,5 +1,5 @@
 // modules
-var experss  = require('express');
+var express  = require('express');
 var app      = express();
 var mongoose = require('mongoose');
 
@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var db = require('./config/db');
 
 var port = process.env.PORT || 9090;
-// mongoose.connect(db.url);
+mongoose.connect(db.url);
 
 app.configure(function () {
   app.use(express.static(__dirname + '/public'));
@@ -23,5 +23,5 @@ require('./app/routes')(app);
 
 // start app
 app.listen(port);
-console.log('Magic happens on prot ' + port);
+console.log('Magic happens on port ' + port);
 exports = module.exports = app;
