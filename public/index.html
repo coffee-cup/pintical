@@ -13,20 +13,21 @@
     <link rel="stylesheet" href="css/kube.min.css">
     <!-- custom styles -->
 
-    <!-- JS -->
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="libs/angular-route/angular-route.min.js"></script>
+    <!-- JS   (MAKE MIN WHEN DEPLOY) -->
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-route/angular-route.js"></script>
 
     <!-- ANGULAR CUSTOM -->
-    <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
+    <script src="js/controllers/allpages.js"></script>
+    <script src="js/controllers/createpage.js"></script>
+    <script src="js/controllers/page.js"></script>
+    <script src="js/services/pageservice.js"></script>
     <script src="js/core.js"></script>
 </head>
 
 <body ng-app="wikiMessage">
     <div class="container">
-        <h1>WIKI MESSAGE</h1>
-
+        <h1>THE GOOD LOOKING TITLE</h1>
         <!-- ANGULAR DYNAMIC CONTENT -->
         <div ng-view></div>
 

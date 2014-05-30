@@ -74,7 +74,6 @@ module.exports = function(app) {
       if (err) handleError(err, res);
       if (page) {
         var msg = new Message({
-          name: req.body.name,
           body: req.body.body,
           _owner: page._id,
         });
