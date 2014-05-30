@@ -11,4 +11,12 @@ angular.module('pageController.controller', [])
     }).error(function(err) {
       $location.path('/' + $routeParams.name + '/create/');
     });
+
+    $scope.createMessage = function(password, body) {
+      pageService.createMessage($routeParams.name, password, body).success(function(messages) {
+        $scope.messages = messages;
+      }).error(function(err) {
+        $scope.err = err.message;
+      });
+    }
   });

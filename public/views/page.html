@@ -1,7 +1,16 @@
 <h2>{{page.name}}</h2>
 
 <div class="messages">
-  <p class="msg" ng-repeat="msg in messages">
-    {{msg.body}}
-  </p>
+    <div ng-show="err" class="error">{{err}}</div>
+
+    <form novalidate class="create-form">
+        Password (if needed):
+        <input type="text" ng-model="password" /> <br>
+        <textarea ng-model="body"></textarea> <br>
+        <button ng-click="createMessage(password, body)">CREATE MESSAGE</button>
+    </form>
+
+    <p class="msg" ng-repeat="msg in messages">
+        {{msg.body}}
+    </p>
 </div>

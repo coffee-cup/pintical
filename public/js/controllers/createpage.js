@@ -3,8 +3,8 @@ angular.module('createPageController.controller', [])
     $scope.message = "first";
     $scope.name = $routeParams.name;
 
-    $scope.create = function(pass) {
-      pageService.createPage($routeParams.name).success(function(res) {
+    $scope.createPage = function(pass) {
+      pageService.createPage($routeParams.name, pass).success(function(res) {
         $location.path('/' + $routeParams.name);
       });
     };

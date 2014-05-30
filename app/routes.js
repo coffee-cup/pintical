@@ -3,7 +3,7 @@ var Page = require('./models/page.js'),
 
 module.exports = function(app) {
 
-  // help functions =============
+  // helper functions =============
   function handleError(err, res) {
     console.log(err);
     res.send(500, {
@@ -13,14 +13,18 @@ module.exports = function(app) {
 
   // server routes ==============
   app.get('/api/pages', function(req, res) {
-    Page.find(function(err, pages) {
+    Page.find({})
+    .sort('-created')
+    .exec(function(err, pages) {
       if (err) handleError(err, res);
       res.json(pages); // return all the pages in json
     });
   });
 
   app.get('/api/messages', function(req, res) {
-    Message.find(function(err, messages) {
+    Message.find({})
+    .sort('-created')
+    .exec(function(err, messages) {
       if (err) handleError(err, res);
       res.json(messages);
     });
@@ -40,7 +44,8 @@ module.exports = function(app) {
   });
 
   app.post('/api/page/:name', function(req, res) {
-    Page.findOne({name: req.params.name}, function(err, page) {
+    Page
+    .findOne({name: req.params.name}, function(err, page) {
       if (err) handleError(err, res);
       if (!page) {
         page = new Page({
@@ -59,7 +64,9 @@ module.exports = function(app) {
   });
 
   app.get('/api/page/:name/messages', function(req, res) {
-    Page.findOne({name: req.params.name}, function(err, page) {
+    Page.findOne({name: req.params.name})
+    .sort('-created')
+    .exec(function(err, page) {
       if (err) handleError(err, res);
 
       Message.find({_owner: page._id}, function(err, messages) {
@@ -69,10 +76,18 @@ module.exports = function(app) {
   });
 
   app.post('/api/page/:name/message', function(req, res) {
-    Page.findOne({name: req.params.name},
-      function(err, page) {
+    Page.findOne({name: req.params.name}, function(err, page) {
       if (err) handleError(err, res);
       if (page) {
+        if(page.password && page.password != "") {
+          if(req.body.password != page.password) {
+            res.send(403, {
+              status: "failure",
+              message: "The password is incorrect"
+            });
+            return;
+          }
+        }
         var msg = new Message({
           body: req.body.body,
           _owner: page._id,
