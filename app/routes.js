@@ -84,7 +84,8 @@ module.exports = function(app) {
           page.save();
           Message
           .find({_owner: page._id})
-          .sort('-created').exec(function(err, messages) {
+          .sort('-created')
+          .exec(function(err, messages) {
             if (err) handleError(err, res);
             res.json(messages);
           });
