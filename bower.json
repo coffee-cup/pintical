@@ -2,8 +2,9 @@
 	"name": "chatter",
 	"version": "1.0.0",
 	"dependencies": {
-		"animate.css": "latest",
-		"angular": "latest",
-		"angular-route": "latest"
+    "animate.css"   : "latest",
+    "angular"       : "latest",
+    "angular-route" : "latest",
+    "pure"          : "latest"
 	}
 }

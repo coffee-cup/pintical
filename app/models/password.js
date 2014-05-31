@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var PasswordSchema = new Schema({
   password : String,
-  _page : {type  : Schema.Types.ObjectId, ref : 'Page'},
+  _page    : {type   : Schema.Types.ObjectId, ref : 'Page'},
   created  : {type   : Date, default              : Date.now},
 });
 

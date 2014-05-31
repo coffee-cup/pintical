@@ -4,9 +4,13 @@
     <div ng-show="err" class="error">{{err}}</div>
 
     <form novalidate class="create-form">
-        Password (if needed):
-        <input type="text" ng-model="password" /> <br>
-        <textarea ng-model="body"></textarea> <br>
+        <div ng-show="page.isPass" class="pass-wrapper">
+            Password (if needed):
+            <input type="text" ng-model="password" />
+            <br>
+        </div>
+        <textarea ng-model="body"></textarea>
+        <br>
         <button ng-click="createMessage(password, body)">CREATE MESSAGE</button>
     </form>
 

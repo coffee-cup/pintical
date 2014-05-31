@@ -1,5 +1,5 @@
 angular.module('createPageController.controller', [])
-  .controller('createPageController', function($scope, $http, $routeParams, $location,pageService) {
+  .controller('createPageController', function($scope, $http, $routeParams, $location, pageService) {
     $scope.message = "first";
     $scope.name = $routeParams.name;
 

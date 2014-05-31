@@ -9,7 +9,7 @@ angular.module('pageController.controller', [])
         $scope.messages = messages;
       });
     }).error(function(err) {
-      $location.path('/' + $routeParams.name + '/create/');
+      $location.path('/' + $routeParams.name + '/create');
     });
 
     $scope.createMessage = function(password, body) {

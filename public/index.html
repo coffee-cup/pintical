@@ -10,8 +10,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/kube.min.css">
-    <!-- custom styles -->
+    <link rel="stylesheet" href="css/pure-mins.css">
 
     <!-- JS   (MAKE MIN WHEN DEPLOY) -->
     <script src="libs/angular/angular.js"></script>
@@ -27,9 +26,23 @@
 
 <body ng-app="wikiMessage">
     <div class="container">
-        <h1>THE GOOD LOOKING HEADER</h1>
+
+        <div class="pure-g-r">
+            <div class="header">
+                <div class="pure-u-1-2">
+                    <h1>Chatter</h1>
+                    <h1 class="subheading">An anoyomous, page base message system</h1>
+                </div>
+            </div>
+        </div>
         <!-- ANGULAR DYNAMIC CONTENT -->
-        <div ng-view></div>
+        <div class="main-content">
+            <div class="pure-g-r">
+                <div class="pure-u-1">
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </body>
