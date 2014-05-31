@@ -1,5 +1,5 @@
 {
-  "name"         : "wiki-message",
+  "name"         : "chatter",
   "main"         : "server.js",
   "description"  : "wiki message application",
   "author"       : "coffeecup",

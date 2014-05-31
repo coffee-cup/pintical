@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var PageSchema = new Schema({
   name     : String,
-  password : String,
+  password : {type: Schema.Types.ObjectId, ref : 'Password'},
   messages : [{type  : Schema.Types.ObjectId, ref : 'Message'}],
   created  : {type   : Date, default              : Date.now},
   updated  : {type   : Date, default              : Date.now}

@@ -1,5 +1,5 @@
 {
-	"name": "starter-node-angular",
+	"name": "chatter",
 	"version": "1.0.0",
 	"dependencies": {
 		"animate.css": "latest",
