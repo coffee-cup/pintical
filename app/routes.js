@@ -1,5 +1,5 @@
 var Page = require('./models/page.js'),
-Message  = require('./models/message.js');
+  Message = require('./models/message.js');
 Password = require('./models/password.js')
 
 module.exports = function(app) {
@@ -17,26 +17,28 @@ module.exports = function(app) {
   // get all the pages
   app.get('/api/pages', function(req, res) {
     Page.find({})
-    .sort('-created')
-    .exec(function(err, pages) {
-      if (err) handleError(err, res);
-      res.json(pages); // return all the pages in json
-    });
+      .sort('-created')
+      .exec(function(err, pages) {
+        if (err) handleError(err, res);
+        res.json(pages); // return all the pages in json
+      });
   });
 
   // get all the messages for each page
   app.get('/api/messages', function(req, res) {
     Message.find({})
-    .sort('-created')
-    .exec(function(err, messages) {
-      if (err) handleError(err, res);
-      res.json(messages);
-    });
+      .sort('-created')
+      .exec(function(err, messages) {
+        if (err) handleError(err, res);
+        res.json(messages);
+      });
   });
 
   // get a specific page
   app.get('/api/page/:name', function(req, res) {
-    Page.findOne({name: req.params.name}, function(err, doc) {
+    Page.findOne({
+      name: req.params.name
+    }, function(err, doc) {
       if (err) handleError(err, res);
       if (doc) {
         res.json(doc);
@@ -51,68 +53,76 @@ module.exports = function(app) {
   // create a specific page
   app.post('/api/page/:name', function(req, res) {
     Page
-    .findOne({name: req.params.name}, function(err, page) {
-      if (err) handleError(err, res);
+      .findOne({
+        name: req.params.name
+      }, function(err, page) {
+        if (err) handleError(err, res);
 
-      // the page has not already been created, make one
-      if (!page) {
-        var isPass = false;
-        if(req.body.password) isPass = true;
+        // the page has not already been created, make one
+        if (!page) {
+          var isPass = false;
+          if (req.body.password) isPass = true;
 
-        var page = new Page({
-          isPass   : isPass,
-          name     : req.params.name,
-          messages : []
-        });
+          var page = new Page({
+            isPass: isPass,
+            name: req.params.name,
+            messages: []
+          });
 
-        page.save(function(err, page) {
-          if (err) handleError(err, res);
+          page.save(function(err, page) {
+            if (err) handleError(err, res);
 
-          // save the page and make a new password if their was one provided
-          if(req.body.password) {
-            var pass = null;
-            pass = new Password({
-              password : req.body.password,
-              _page    : page._id
-            });
-          }
+            // save the page and make a new password if their was one provided
+            if (req.body.password) {
+              var pass = null;
+              pass = new Password({
+                password: req.body.password,
+                _page: page._id
+              });
+            }
 
-          if (pass) {
-            pass.save();
-          }
-          res.json(page);
-        });
-      } else {
-        res.json(403, {
-          error: 'The page has already been created'
-        });
-      }
-    });
+            if (pass) {
+              pass.save();
+            }
+            res.json(page);
+          });
+        } else {
+          res.json(403, {
+            error: 'The page has already been created'
+          });
+        }
+      });
   });
 
   // get all the messages for a specific page
   app.get('/api/page/:name/messages', function(req, res) {
-    Page.findOne({name: req.params.name})
-    .sort('-created')
-    .exec(function(err, page) {
-      if (err) handleError(err, res);
+    Page.findOne({
+      name: req.params.name
+    })
+      .sort('-created')
+      .exec(function(err, page) {
+        if (err) handleError(err, res);
 
-      Message.find({_owner: page._id}, function(err, messages) {
-        res.json(messages);
+        Message.find({
+          _owner: page._id
+        }, function(err, messages) {
+          res.json(messages);
+        });
       });
-    });
   });
 
   // create a new message for the given page
   app.post('/api/page/:name/message', function(req, res) {
-    Page.findOne({name: req.params.name}, function(err, page) {
+    Page.findOne({
+      name: req.params.name
+    }, function(err, page) {
       if (err) handleError(err, res);
       if (page) {
 
         // if the current page has a password
-        if(page.isPass) {
+        if (page.isPass) {
           // password is required but none was provided
-          if(!req.body.password) {
+          if (!req.body.password) {
             res.send(403, {
               status: "failure",
               message: "A password is required"
@@ -120,47 +130,54 @@ module.exports = function(app) {
             return;
           }
           // look for a password that belongs to the page
-          Password.findOne({_page: page._id}, function(err, pass) {
+          Password.findOne({
+            _page: page._id
+          }, function(err, pass) {
             if (pass) {
               if (err) handleError(err, res);
               if (pass.password != req.body.password) {
-                console.log('password is incorrect');
                 res.send(403, {
                   status: "failure",
                   message: "The password is incorrect"
                 });
+                console.log('the password is incorrect');
                 return;
+              } else {
+                console.log('creating new message');
+
+                // create a new message
+                var msg = new Message({
+                  body: req.body.body,
+                  _owner: page._id,
+                });
+
+                // push the message onto the page
+                page.messages.push(msg);
+                msg.save(function(err, msg) {
+                  if (err) handleError(err, res);
+                  page.save();
+
+                  // send back the messages
+                  Message
+                    .find({
+                      _owner: page._id
+                    })
+                    .sort('-created')
+                    .exec(function(err, messages) {
+                      if (err) handleError(err, res);
+                      res.json(messages);
+                    });
+                });
               }
-            }else {
+            } else {
               res.send(500, {
                 status: "failure",
                 message: "Cannot find password for the page"
               });
+              return;
             }
           });
         }
-
-        // create a new message
-        var msg = new Message({
-          body: req.body.body,
-          _owner: page._id,
-        });
-
-        // push the message onto the page
-        page.messages.push(msg);
-        msg.save(function(err, msg) {
-          if (err) handleError(err, res);
-          page.save();
-
-          // send back the messages
-          Message
-          .find({_owner: page._id})
-          .sort('-created')
-          .exec(function(err, messages) {
-            if (err) handleError(err, res);
-            res.json(messages);
-          });
-        });
       } else {
         res.send(403, {
           status: "failure",
@@ -172,11 +189,15 @@ module.exports = function(app) {
 
   // delete a specific page
   app.post('/api/page/delete/:name', function(req, res) {
-    Page.findOne({name: req.params.name}, function(err, page) {
+    Page.findOne({
+      name: req.params.name
+    }, function(err, page) {
       if (err) handleError(err, res);
       if (page) {
         page.remove();
-        Message.remove({_owner: page._id});
+        Message.remove({
+          _owner: page._id
+        });
 
         res.send({
           status: 'success',
@@ -206,7 +227,10 @@ module.exports = function(app) {
     Password.remove(function(err) {
       if (err) handleError(err, res);
 
-      res.send({status: 'success', message: 'All passwords were removed'});
+      res.send({
+        status: 'success',
+        message: 'All passwords were removed'
+      });
     })
   });
 
@@ -215,7 +239,10 @@ module.exports = function(app) {
     Message.remove(function(err) {
       if (err) handleError(err, res);
 
-      res.send({status: 'success', message: 'All messages were removed'});
+      res.send({
+        status: 'success',
+        message: 'All messages were removed'
+      });
     });
   });
 
@@ -224,7 +251,10 @@ module.exports = function(app) {
     Page.remove(function(err) {
       if (err) handleError(err, res);
 
-      res.send({status: 'success', message: 'All pages were removed'});
+      res.send({
+        status: 'success',
+        message: 'All pages were removed'
+      });
     })
   });
 
