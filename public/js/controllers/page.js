@@ -15,6 +15,7 @@ angular.module('pageController.controller', [])
     $scope.createMessage = function(password, body) {
       pageService.createMessage($routeParams.name, password, body).success(function(messages) {
         $scope.messages = messages;
+        $scope.err = "";
       }).error(function(err) {
         $scope.err = err.message;
       });
