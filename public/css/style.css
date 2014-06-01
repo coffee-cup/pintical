@@ -1,8 +1,51 @@
-    .pure-g > div {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    .l-box {
-        padding: 1em;
-    }
+.center {
+  margin: auto;
+  width: 40%;
+  text-align: center;
+}
+
+.chat-input {
+  margin:auto;
+  text-align: center;
+
+}
+
+.join-chat-form input[type="text"] {
+  display: grid;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+.mainPage {
+  font-family: sans-serif;
+}
+
+.header {
+  margin-top: 8em;
+  width: 30%;
+}
+
+.header h1 {
+  font-size: 4em;
+}
+
+.header h2 {
+  font-size: 2em;
+}
+
+.button {
+  background-color: #E5E4E2;
+  width: 6em;
+
+  padding: 0.4em 0;
+  border: 1px solid #E5E4E2;
+  border-top: 1px solid #E5E4E2;
+  border-left: 1px solid #E5E4E2;
+  font-size: 0.8em;
+}
+
+.button:hover {
+  background-color: #C0C0C0;
+  background: #C0C0C0;
+}

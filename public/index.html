@@ -8,11 +8,12 @@
 
     <title>Chatter</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="stylesheet" href="css/side-menu.css"> -->
 
-    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- JS   (MAKE MIN WHEN DEPLOY) -->
     <script src="libs/angular/angular.js"></script>
@@ -28,18 +29,13 @@
 
 
 <body ng-app="wikiMessage">
-
-    <div id="layout">
-        <div id="main">
-            <div class="header units-row">
-                <div class="unit-centered unit-20">
-                    <h1>Chatter</h1>
-                    <h2>Cool beans</h2>
-                </div>
-            </div>
-
-            <div ng-view></div>
+    <div class="wrapper">
+        <div class="header center">
+            <h1>Chatter</h1>
+            <h2>Anonymous Chat</h2>
+            <hr>
         </div>
+        <div class="content" ng-view></div>
     </div>
 </body>
 
