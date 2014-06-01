@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var messageSchema = new Schema({
   body    : String,
-  _owner  : {type   : String, ref   : 'Message'},
+  _owner  : {type   : String, ref   : 'Page'},
   created : {type   : Date, default : Date.now},
   updated : {type   : Date, default : Date.now}
 });

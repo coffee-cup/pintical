@@ -10,40 +10,34 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/side-menu.css">
     <link rel="stylesheet" href="css/pure-mins.css">
+    <link rel="stylesheet" href="css/buttons.css">
 
     <!-- JS   (MAKE MIN WHEN DEPLOY) -->
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.js"></script>
 
     <!-- ANGULAR CUSTOM -->
-    <script src="js/controllers/allpages.js"></script>
+    <script src="js/controllers/home.js"></script>
     <script src="js/controllers/createpage.js"></script>
     <script src="js/controllers/page.js"></script>
     <script src="js/services/pageservice.js"></script>
     <script src="js/core.js"></script>
 </head>
 
+
 <body ng-app="wikiMessage">
-    <div class="container">
 
-        <div class="pure-g-r">
+    <div id="layout">
+        <div id="main">
             <div class="header">
-                <div class="pure-u-1-2">
-                    <h1>Chatter</h1>
-                    <h1 class="subheading">An anoyomous, page base message system</h1>
-                </div>
+                <h1>Chatter</h1>
+                <h2>Cool beans</h2>
             </div>
-        </div>
-        <!-- ANGULAR DYNAMIC CONTENT -->
-        <div class="main-content">
-            <div class="pure-g-r">
-                <div class="pure-u-1">
-                    <div ng-view></div>
-                </div>
-            </div>
-        </div>
 
+            <div ng-view></div>
+        </div>
     </div>
 </body>
 

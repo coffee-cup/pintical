@@ -1,7 +1,7 @@
   var wikiMessage = angular.module('wikiMessage',
             ['ngRoute',
             'pageService.service',
-            'allPagesController.controller',
+            'homeController.controller',
             'pageController.controller',
             'createPageController.controller']);
 
@@ -10,8 +10,8 @@
     $routeProvider
 
       .when('/', {
-        templateUrl : 'views/allpages.html',
-        controller  : 'allPagesController'
+        templateUrl : 'views/home.html',
+        controller  : 'homeController'
       })
 
       .when('/:name', {
