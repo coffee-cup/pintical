@@ -56,3 +56,7 @@ body ::selection      { background: #58FAD0; }
   padding-left: 1.5em;
   overflow-wrap: break-word;
 }
+
+.enterMessage {
+  padding-top: 1em;
+}

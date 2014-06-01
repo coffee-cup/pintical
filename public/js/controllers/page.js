@@ -4,6 +4,8 @@ angular.module('pageController.controller', [])
     $scope.messages = [];
     $scope.isAuth = false;
 
+    $scope.header_subtitle = $routeParams.name;
+
     pageService.getPage($routeParams.name).success(function(page) {
       $scope.page = page;
 
@@ -44,7 +46,7 @@ angular.module('pageController.controller', [])
     }
 
     $scope.isEnter = function(event) {
-      if(event.keyCode == 13) {
+      if (event.keyCode == 13) {
         $scope.createMessage($scope.password, $scope.message);
         event.preventDefault();
       }

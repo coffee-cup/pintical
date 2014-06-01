@@ -1,14 +1,14 @@
+<div ng-include="'views/main_header.html'"></div>
+
 <div class="home-margin">
-<div class="container">
-    <div class="grid">
-        <div class="grid__col grid__col--1-of-4 grid__col--centered">
-            <form novalidate class="pure-form join-chat-form">
-                <input type="text" ng-model="name" class="pure-input-1" placeholder="Page Name">
-                <button type="submit" ng-click="findPage(name)" class="pure-button pure-input-1">Join</button>
-            </form>
+    <div class="container">
+        <div class="grid">
+            <div class="grid__col grid__col--1-of-4 grid__col--centered">
+                <form novalidate class="pure-form join-chat-form">
+                    <input type="text" ng-model="name" class="pure-input-1" placeholder="Page Name">
+                    <button type="submit" ng-click="findPage(name)" class="pure-button pure-input-1">Join</button>
+                </form>
+            </div>
         </div>
     </div>
-    {{test}}
-    <button ng-click="allPages()">TESTSET</button>
-</div>
 </div>
