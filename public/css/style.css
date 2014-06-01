@@ -1,3 +1,7 @@
+
+body ::-moz-selection { background: #58FAD0; }
+body ::selection      { background: #58FAD0; }
+
 .center {
   text-align: center;
 }
