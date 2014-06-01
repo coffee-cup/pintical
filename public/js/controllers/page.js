@@ -32,14 +32,21 @@ angular.module('pageController.controller', [])
     }
 
     $scope.createMessage = function(password, body) {
-      pageService.createMessage($routeParams.name, $scope.authPass, body).success(function(messages) {
-        if (body && body != "") {
+      if (body && body != "") {
+        pageService.createMessage($routeParams.name, $scope.authPass, body).success(function(messages) {
           $scope.message = "";
           $scope.messages = messages;
           $scope.err = "";
-        }
-      }).error(function(err) {
-        $scope.err = err.message;
-      });
+        }).error(function(err) {
+          $scope.err = err.message;
+        });
+      }
+    }
+
+    $scope.isEnter = function(event) {
+      if(event.keyCode == 13) {
+        $scope.createMessage($scope.password, $scope.message);
+        event.preventDefault();
+      }
     }
   });

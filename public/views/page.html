@@ -12,7 +12,7 @@
     <div ng-show="isAuth" class="grid">
         <div class="grid__col grid__col--2-of-4 grid__col--centered">
             <form class="pure-form join-chat-form">
-                <textarea ng-model="message" id="message-area" rows="3" class- "pure-input-1" placeholder="Message"></textarea>
+                <textarea ng-model="message" ng-keypress="isEnter($event)" id="message-area" rows="3" class- "pure-input-1" placeholder="Message"></textarea>
                 <button type="submit" ng-click="createMessage(password, message)" class="pure-button pure-input-1">Submit</button>
             </form>
         </div>
@@ -27,12 +27,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $('#message-area').keydown(function(event) {
-      if(event.keyCode == 13) {
-        $(this.form).submit();
-        return false;
-      }
-    });
-</script>
