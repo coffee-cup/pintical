@@ -1,4 +1,6 @@
 angular.module('homeController.controller', [])
-  .controller('homeController', function($scope, $http, pageService) {
-
+  .controller('homeController', function($scope, $location) {
+    $scope.findPage(name) {
+      $location.path.('/' + name);
+    }
   });
