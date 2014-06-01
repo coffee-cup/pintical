@@ -25,7 +25,6 @@ angular.module('pageController.controller', [])
         $scope.authPass = password;
         $scope.isAuth = true;
       }).error(function(err) {
-        console.log(err);
         $scope.err = err.message;
         $scope.isAuth = false;
       });

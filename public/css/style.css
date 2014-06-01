@@ -15,16 +15,10 @@
   width: 10em;
 }
 
-/*.chat-input {
-  margin:auto;
-  text-align: center;
-
-}*/
-/*
-.join-chat-form input[type="text"] {
-  display: grid;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 1em;
+.error {
+  color: red;
 }
-*/
+ #message-area {
+  resize: none;
+  width: 100%;
+ }
