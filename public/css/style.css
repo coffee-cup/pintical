@@ -7,10 +7,6 @@
   font-family: "omnes-pro",sans-serif;
 }
 
-.home-margin {
-  margin-top:  2em;
-}
-
 .header h1 {
   font-weight: 100;
   font-size: 800%;
@@ -38,15 +34,21 @@
   width: 100%;
  }
 
+.container {
+  margin-top: 3em;
+}
+
 .messages {
-  margin-top: 5em;
+  margin-top: 2em;
 }
 
 .content-quote {
   font-family: "Georgia", serif;
   color: #666;
   font-style: italic;
-  line-height: 1.8;
-  border-left: 5px solid red;
+  line-height: 1.4;
+  border-left: 5px solid;
+  border-color: blue;
   padding-left: 1.5em;
+  overflow-wrap: break-word;
 }
