@@ -5,6 +5,7 @@
   "author"       : "coffeecup",
   "dependencies" : {
     "express"      : "~3.4.4",
-    "mongoose"     : "~3.6.2"
+    "mongoose"     : "~3.6.2",
+    "winston"      : "latest"
   }
 }
