@@ -1,8 +1,10 @@
-<div class="home center">
-    <div class="chat-input">
-        <form novalidate class="join-chat-form">
-            <input ng-model="name" class="input-chat" type="text">
-            <a class="button" ng-click="findPage(name)">Join</a>
+<div class="container">
+    <div class="grid">
+        <div class="grid__col grid__col--1-of-4 grid__col--centered">
+            <form novalidate class="pure-form join-chat-form">
+                <input type="text" ng-model="name" class="pure-input-1" placeholder="Page Name">
+                <button type="submit" ng-click="findPage(name)" class="pure-button pure-input-1 pure-button-primary">Join</button>
+        </div>
         </form>
     </div>
 </div>

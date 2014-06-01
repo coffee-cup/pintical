@@ -10,12 +10,14 @@
 
     <!-- <link rel="stylesheet" href="css/side-menu.css"> -->
 
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/layout.css">
+    <!-- <link rel="stylesheet" href="libs/skeleton/stylesheets/base.css">
+    <link rel="stylesheet" href="libs/skeleton/stylesheets/layout.css"> -->
+    <link rel="stylesheet" href="libs/pure/pure.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/toast.css">
 
-    <!-- JS   (MAKE MIN WHEN DEPLOY) -->
+
+    <!-- JS -->
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.js"></script>
 
@@ -28,15 +30,19 @@
 </head>
 
 
-<body ng-app="wikiMessage">
-    <div class="wrapper">
-        <div class="header center">
-            <h1>Chatter</h1>
-            <h2>Anonymous Chat</h2>
-            <hr>
+<body ng-app="chatter">
+    <div class="container">
+        <div class="grid">
+            <div class="grid__col grid__col--3-of-4 grid__col--centered">
+                <div class="header center">
+                    <h1>Chatter</h1>
+                    <h2>Anonymous Chat</h2>
+                    <hr>
+                </div>
+            </div>
         </div>
-        <div class="content" ng-view></div>
     </div>
+    <div class="content" ng-view></div>
 </body>
 
 </html>

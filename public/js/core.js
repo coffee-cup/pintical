@@ -1,4 +1,4 @@
-  var wikiMessage = angular.module('wikiMessage',
+  var chatter = angular.module('chatter',
             ['ngRoute',
             'pageService.service',
             'homeController.controller',
@@ -6,7 +6,7 @@
             'createPageController.controller']);
 
   // configure our routes
-  wikiMessage.config(function($routeProvider) {
+  chatter.config(function($routeProvider) {
     $routeProvider
 
       .when('/', {

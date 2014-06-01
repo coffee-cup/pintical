@@ -5,6 +5,7 @@
     "animate.css"   : "latest",
     "angular"       : "latest",
     "angular-route" : "latest",
+    "skeleton"      : "latest",
     "pure"          : "latest"
 	}
 }

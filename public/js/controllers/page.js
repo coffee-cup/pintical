@@ -14,8 +14,8 @@ angular.module('pageController.controller', [])
         });
       } else {
         $scope.isAuth = false;
-      }
-    }).error(function(err) {
+
+}    }).error(function(err) {
       $location.path('/' + $routeParams.name + '/create');
     });
 

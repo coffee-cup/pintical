@@ -5,7 +5,7 @@
     <form ng-show="page.isPass" novalidate class="password-form">
         <p class="pass-label">This page requires a password to view</p>
         <input type="text" ng-model="password">
-        <button ng-click="authPage(password)">Enter Password</button>
+        <button class="pure-button" ng-click="authPage(password)">Enter Password</button>
     </form>
 
     <form ng-show="isAuth" novalidate class="create-form">
