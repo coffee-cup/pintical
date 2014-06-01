@@ -3,8 +3,22 @@
 }
 
 .header {
-  margin-top: 10em;
-  font-family: sans-serif;
+  /*margin-top: 10em;*/
+  font-family: "omnes-pro",sans-serif;
+}
+
+.home-margin {
+  margin-top:  2em;
+}
+
+.header h1 {
+  font-weight: 100;
+  font-size: 800%;
+}
+
+.header h2 {
+  font-weight: 100;
+  font-size: 200%;
 }
 
 .join-input {
