@@ -64,7 +64,9 @@ module.exports = function(app) {
 
   // get all the pages
   app.get('/api/pages', function(req, res) {
-    Page.find({isPass: false})
+    Page.find({
+      isPass: false
+    })
       .sort('-created')
       .exec(function(err, pages) {
         if (err) handleError(err, res);
@@ -145,7 +147,7 @@ module.exports = function(app) {
 
       Message.find({
         _owner: page._id
-      }, function(err, messages) {
+      }).sort('-created').exec(function(err, messages) {
         if (err) handleError(err, res);
 
         logger.info('all messages returned for ' + req.params.name);
