@@ -1,10 +1,11 @@
 angular.module('pageController.controller', [])
-  .controller('pageController', function($scope, $http, $location, $routeParams, pageService) {
+  .controller('pageController', function($rootScope, $scope, $http, $location, $routeParams, pageService) {
     $scope.page = {};
     $scope.messages = [];
     $scope.isAuth = false;
 
-    $scope.header_subtitle = $routeParams.name;
+    $rootScope.header_title = "";
+    $rootScope.header_subtitle = $routeParams.name;
 
     pageService.getPage($routeParams.name).success(function(page) {
       $scope.page = page;

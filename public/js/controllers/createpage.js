@@ -1,10 +1,10 @@
 angular.module('createPageController.controller', [])
-  .controller('createPageController', function($scope, $http, $routeParams, $location, pageService) {
+  .controller('createPageController', function($rootScope, $scope, $http, $routeParams, $location, pageService) {
     $scope.message = "first";
     $scope.name = $routeParams.name;
 
-    $scope.header_title = 'Chatter';
-    $scope.header_subtitle = 'Anonymous Chat';
+    $rootScope.header_title = 'Chatter';
+    $rootScope.header_subtitle = 'Anonymous Chat';
 
     pageService.getPage($routeParams.name).success(function() {
       $location.path('/' + $routeParams.name);

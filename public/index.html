@@ -30,6 +30,17 @@
 
 <body ng-app="chatter">
     <div class="container">
+        <div class="header grid">
+            <div class="grid__col grid__col--3-of-4 grid__col--centered">
+                <div class="center">
+                    <h1 ng-show="header_title">{{header_title}}</h1>
+                    <h2 ng-show="header_subtitle">{{header_subtitle}}</h2>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+
         <div class="content" ng-view></div>
     </div>
 </body>
