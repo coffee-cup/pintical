@@ -1,5 +1,8 @@
+<div ng-class="{hidden: isCreated}" ng-include="'views/createpage.html'"></div>
+
 <div class="pageContainer">
-    <div class="grid" ng-hide="isAuth">
+
+    <div ng-class="{hidden: isAuth || !isCreated}"  class="grid">
         <div class="grid__col grid__col--1-of-4 grid__col--centered">
             <form ng-show="page.isPass" class="pure-form pure-form-stacked">
                 <p ns-hide="err" class="error">{{err}}</p>
@@ -9,7 +12,7 @@
         </div>
     </div>
 
-    <div ng-show="isAuth" class="grid enterMessage">
+    <div ng-class="{hidden: !isAuth || !isCreated}" class="grid enterMessage">
         <div class="grid__col grid__col--2-of-4 grid__col--centered">
             <form class="pure-form join-chat-form">
                 <textarea ng-model="message" ng-keypress="isEnter($event)" id="message-area" rows="3" class- "pure-input-1" placeholder="Message"></textarea>

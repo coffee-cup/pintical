@@ -6,6 +6,10 @@ body ::selection      { background: #58FAD0; }
   text-align: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .cursor-onmouseover {
   cursor: hand;cursor: pointer;
 }

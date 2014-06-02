@@ -62,7 +62,7 @@ module.exports = function(app) {
 
   // server routes ==============
 
-  // get all the pages
+  // get all the pages with no password
   app.get('/api/pages', function(req, res) {
     Page.find({
       isPass: false
@@ -87,7 +87,8 @@ module.exports = function(app) {
       } else {
         logger.warn('attempt to get a page that does not exist');
         res.json(404, {
-          'error': 'The page does not exists'
+          'error': 'failure',
+          'message' : 'The page does not exist'
         });
       }
     });
@@ -130,9 +131,10 @@ module.exports = function(app) {
             res.json(page);
           });
         } else {
-          res.json(403, {
-            error: 'The page has already been created'
-          });
+          handleError({
+            status: "failure",
+            message: 'The page has already been created'
+          }, res);
         }
       });
   });

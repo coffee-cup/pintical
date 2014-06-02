@@ -2,8 +2,7 @@
             ['ngRoute',
             'pageService.service',
             'homeController.controller',
-            'pageController.controller',
-            'createPageController.controller']);
+            'pageController.controller']);
 
   // configure our routes
   chatter.config(function($routeProvider) {
@@ -17,10 +16,5 @@
       .when('/:name', {
         templateUrl : 'views/page.html',
         controller  : 'pageController'
-      })
-
-      .when('/:name/create', {
-        templateUrl : 'views/createpage.html',
-        controller  : 'createPageController'
       });
   });

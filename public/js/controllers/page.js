@@ -1,32 +1,44 @@
 angular.module('pageController.controller', [])
   .controller('pageController', function($rootScope, $scope, $http, $location, $routeParams, pageService) {
-    $scope.page = {};
+    $scope.page = null;
+    $scope.name = $routeParams.name;
     $scope.messages = [];
     $scope.isAuth = false;
+    $scope.isCreated = false;
 
-    $rootScope.header_title = "";
-    $rootScope.header_subtitle = $routeParams.name;
+    applyHeaders();
 
     pageService.getPage($routeParams.name).success(function(page) {
       $scope.page = page;
-
+      $scope.isCreated = true;
       if (!page.isPass) {
         $scope.isAuth = true;
         pageService.getMessages($routeParams.name).success(function(messages) {
           $scope.messages = messages;
         });
       } else {
-        $scope.isAuth = false;
-
       }
     }).error(function(err) {
-      $location.path('/' + $routeParams.name + '/create');
+      if (err.message == 'The page does not exist') {
+        $scope.page = null;
+        $scope.isCreated = false;
+        $scope.isAuth = false;
+      }
     });
 
-    $scope.authPage = function(password) {
-      pageService.getMessages($routeParams.name, password).success(function(messages) {
+    $scope.createPage = function(pass) {
+      pageService.createPage($routeParams.name, pass).success(function(page) {
+        $scope.password = pass;
+        $scope.authPage();
+        $scope.page = page;
+        $scope.isCreated = true;
+        applyHeaders();
+      });
+    };
+
+    $scope.authPage = function() {
+      pageService.getMessages($routeParams.name, $scope.password).success(function(messages) {
         $scope.messages = messages;
-        $scope.authPass = password;
         $scope.isAuth = true;
       }).error(function(err) {
         $scope.err = err.message;
@@ -36,7 +48,7 @@ angular.module('pageController.controller', [])
 
     $scope.createMessage = function(password, body) {
       if (body && body != "") {
-        pageService.createMessage($routeParams.name, $scope.authPass, body).success(function(messages) {
+        pageService.createMessage($routeParams.name, $scope.password, body).success(function(messages) {
           $scope.message = "";
           $scope.messages = messages;
           $scope.err = "";
@@ -50,6 +62,16 @@ angular.module('pageController.controller', [])
       if (event.keyCode == 13) {
         $scope.createMessage($scope.password, $scope.message);
         event.preventDefault();
+      }
+    }
+
+    function applyHeaders() {
+      if ($scope.isAuth) {
+        $rootScope.header_title = "";
+        $rootScope.header_subtitle = $routeParams.name;
+      } else {
+        $rootScope.header_title = 'Chatter';
+        $rootScope.header_subtitle = 'Anonymous Chat';
       }
     }
   });
