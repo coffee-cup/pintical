@@ -10,6 +10,11 @@ body ::selection      { background: #58FAD0; }
   display: none;
 }
 
+.remove-hyperlink {
+  text-decoration : none;
+  color : #4C4C4C;
+}
+
 .cursor-onmouseover {
   cursor: hand;cursor: pointer;
 }
