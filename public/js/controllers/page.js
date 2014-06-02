@@ -3,6 +3,12 @@ angular.module('pageController.controller', [])
     $scope.page = {};
     $scope.messages = [];
     $scope.isAuth = false;
+    $scope.colour = "";
+
+    var colours = {"#FF3300", "#66FF33", "#0066FF", "#FF0066", "#00FF99"};
+    generateColour();
+
+
 
     $rootScope.header_title = "";
     $rootScope.header_subtitle = $routeParams.name;
@@ -40,10 +46,18 @@ angular.module('pageController.controller', [])
           $scope.message = "";
           $scope.messages = messages;
           $scope.err = "";
+          generateColour();
         }).error(function(err) {
           $scope.err = err.message;
         });
       }
+    }
+    // this hasn't been completed yet
+    function generateColour(){
+      var x = Math.floor((Math.random() * 5) + 1);
+      $('.content-quote').each(function(){
+      $(this).css("border-color":colours[x]);
+    });
     }
 
     $scope.isEnter = function(event) {
