@@ -2,6 +2,7 @@
 var express  = require('express');
 var app      = express();
 var mongoose = require('mongoose');
+var logger   = require('./app/logger');
 
 // configuration
 
@@ -23,5 +24,6 @@ require('./app/routes')(app);
 
 // start app
 app.listen(port);
-console.log('Magic happens on port ' + port);
+logger.info('Magic happens on port ' + port);
+// console.log('Magic happens on port ' + port);
 exports = module.exports = app;

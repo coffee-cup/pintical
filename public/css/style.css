@@ -1,3 +1,7 @@
+
+body ::-moz-selection { background: #58FAD0; }
+body ::selection      { background: #58FAD0; }
+
 .center {
   text-align: center;
 }
@@ -59,4 +63,8 @@
   border-color: blue;
   padding-left: 1.5em;
   overflow-wrap: break-word;
+}
+
+.enterMessage {
+  padding-top: 1em;
 }

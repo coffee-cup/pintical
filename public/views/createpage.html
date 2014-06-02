@@ -1,5 +1,6 @@
-<div class="container">
+<div ng-include="'views/main_header.html'"></div>
 
+<div class="createContainer">
     <div class="grid">
         <div class="grid__col grid__col--2-of-4 grid__col--centered center">
             <h2>Do you want to create the page {{name}}?</h2>
@@ -9,7 +10,7 @@
         <div class="grid__col grid__col--1-of-4 grid__col--centered">
 
             <form novalidate class="pure-form join-chat-form">
-                <input type="password" ng-model="password" class="pure-input-1" placeholder="No Password">
+                <input type="password" ng-model="password" class="pure-input-1" placeholder="Optional Password">
                 <button type="submit" ng-click="createPage(password)" class="pure-button pure-input-1">Create</button>
         </div>
         </form>
