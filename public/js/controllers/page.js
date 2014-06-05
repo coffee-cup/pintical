@@ -36,6 +36,7 @@ angular.module('pageController.controller', [])
         console.log('got message ' + data.body);
         if (data) {
           $scope.messages.unshift(data);
+          $scope.$apply();
         }
       });
     }
