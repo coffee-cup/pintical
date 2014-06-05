@@ -1,5 +1,14 @@
 angular.module('pageController.controller', [])
-  .controller('pageController', function($rootScope, $scope, $http, $location, $routeParams, pageService) {
+  .controller('pageController', function($rootScope,
+    $scope,
+    $http,
+    $location,
+    $routeParams,
+    pageService) {
+
+    var socket = io();
+    socket.emit('chat message', 'hello, world!');
+
     $scope.page = null;
     $scope.name = $routeParams.name;
     $scope.messages = [];
@@ -7,10 +16,29 @@ angular.module('pageController.controller', [])
     $scope.isCreated = false;
     $scope.colour = "";
 
-    var colours = {"#FF3300", "#66FF33", "#0066FF", "#FF0066", "#00FF99"};
-    generateColour();
+    var colours = ["#FF3300", "#66FF33", "#0066FF", "#FF0066", "#00FF99"];
+    // generateColour();
 
-    applyHeaders();
+    $rootScope.header_title = 'Chatter';
+    $rootScope.header_subtitle = 'Anonymous Chat';
+
+    // setup socket.io
+    var socket = io();
+
+    function joinRoom(pass) {
+      if (!pass) {
+        pass = '';
+      }
+      socket.emit('room', $routeParams.name + ':' + pass);
+
+      // listen for a message from the server, then add it to the messages list
+      socket.on('message', function(data) {
+        console.log('got message ' + data.body);
+        if (data) {
+          $scope.messages.unshift(data);
+        }
+      });
+    }
 
     pageService.getPage($routeParams.name).success(function(page) {
       $scope.page = page;
@@ -20,7 +48,8 @@ angular.module('pageController.controller', [])
         pageService.getMessages($routeParams.name).success(function(messages) {
           $scope.messages = messages;
         });
-      } else {
+
+        joinRoom();
       }
     }).error(function(err) {
       if (err.message == 'The page does not exist') {
@@ -36,7 +65,6 @@ angular.module('pageController.controller', [])
         $scope.authPage();
         $scope.page = page;
         $scope.isCreated = true;
-        applyHeaders();
       });
     };
 
@@ -44,6 +72,8 @@ angular.module('pageController.controller', [])
       pageService.getMessages($routeParams.name, $scope.password).success(function(messages) {
         $scope.messages = messages;
         $scope.isAuth = true;
+
+        joinRoom($scope.password);
       }).error(function(err) {
         $scope.err = err.message;
         $scope.isAuth = false;
@@ -52,38 +82,29 @@ angular.module('pageController.controller', [])
 
     $scope.createMessage = function(password, body) {
       if (body && body != "") {
-        pageService.createMessage($routeParams.name, $scope.password, body).success(function(messages) {
+        pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
           $scope.message = "";
-          $scope.messages = messages;
+          // $scope.messages.unshift(msg);
           $scope.err = "";
-          generateColour();
+          // generateColour();
         }).error(function(err) {
           $scope.err = err.message;
         });
       }
     }
-    // this hasn't been completed yet
-    function generateColour(){
-      var x = Math.floor((Math.random() * 5) + 1);
-      $('.content-quote').each(function(){
-      $(this).css("border-color":colours[x]);
-    });
-    }
+
+    // // this hasn't been completed yet
+    // function generateColour(){
+    //   var x = Math.floor((Math.random() * 5) + 1);
+    //   $('.content-quote').each(function(){
+    //   $(this).css("border-color":colours[x]);
+    // });
+    // }
 
     $scope.isEnter = function(event) {
       if (event.keyCode == 13) {
         $scope.createMessage($scope.password, $scope.message);
         event.preventDefault();
-      }
-    }
-
-    function applyHeaders() {
-      if ($scope.isAuth) {
-        $rootScope.header_title = "";
-        $rootScope.header_subtitle = $routeParams.name;
-      } else {
-        $rootScope.header_title = 'Chatter';
-        $rootScope.header_subtitle = 'Anonymous Chat';
       }
     }
   });
