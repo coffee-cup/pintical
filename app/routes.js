@@ -162,7 +162,7 @@ module.exports = function(app, io) {
       Message.find({
         _owner: page._id
       }).sort('-created').exec(function(err, messages) {
-        // if (err) handleError(err, res);
+        if (err) error_handler(err, req, res);
 
         logger.info('all messages returned for ' + req.params.name);
 

@@ -19,9 +19,6 @@ angular.module('pageController.controller', [])
     var colours = ["#FF3300", "#66FF33", "#0066FF", "#FF0066", "#00FF99"];
     // generateColour();
 
-    $rootScope.header_title = 'Chatter';
-    $rootScope.header_subtitle = 'Anonymous Chat';
-
     // setup socket.io
     var socket = io();
 
@@ -41,22 +38,54 @@ angular.module('pageController.controller', [])
       });
     }
 
+    function hideHeader() {
+      $('.header_title').slideUp(300);
+      $('.header_subtitle').show();
+    }
+
+    function showHeader() {
+      $('.header_title').show();
+      $('.header_subtitle').show();
+    }
+
+    // TODO set header depending on what state of the app we are in
+    // and set the header back to the original when we leave or on create
+    // of new page
+    function setHeader() {
+      if ($scope.isCreated && $scope.isAuth) {
+        $rootScope.header_subtitle = $routeParams.name;
+        hideHeader();
+      } else if ($scope.isCreated && !$scope.isAuth) {
+        $rootScope.header_subtitle = $routeParams.name;
+        $rootScope.header_title = 'Pintical';
+        showHeader();
+      }else {
+        $rootScope.header_title = 'Pintical';
+        $rootScope.header_subtitle = 'Anonymous Chat';
+        showHeader();
+      }
+    }
+
     pageService.getPage($routeParams.name).success(function(page) {
       $scope.page = page;
       $scope.isCreated = true;
       if (!page.isPass) {
         $scope.isAuth = true;
+        setHeader();
         pageService.getMessages($routeParams.name).success(function(messages) {
           $scope.messages = messages;
         });
 
         joinRoom();
+      }else {
+        setHeader();
       }
     }).error(function(err) {
       if (err.message == 'The page does not exist') {
         $scope.page = null;
         $scope.isCreated = false;
         $scope.isAuth = false;
+        setHeader();
       }
     });
 
@@ -75,6 +104,7 @@ angular.module('pageController.controller', [])
         $scope.isAuth = true;
 
         joinRoom($scope.password);
+        setHeader();
       }).error(function(err) {
         $scope.err = err.message;
         $scope.isAuth = false;

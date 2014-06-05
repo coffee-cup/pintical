@@ -33,8 +33,8 @@
         <div class="header grid">
             <div class="grid__col grid__col--3-of-4 grid__col--centered">
                 <div class="center">
-                    <h1 ng-show="header_title">{{header_title}}</h1>
-                    <h2 ng-show="header_subtitle">{{header_subtitle}}</h2>
+                    <h1 ng-class="{hidden: header_title == ''}" class="header_title" >{{header_title}}</h1>
+                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle">{{header_subtitle}}</h2>
                     <hr>
                 </div>
             </div>
