@@ -1,11 +1,11 @@
-  var chatter = angular.module('chatter',
+  var pintical = angular.module('pintical',
             ['ngRoute',
             'pageService.service',
             'homeController.controller',
             'pageController.controller']);
 
   // configure our routes
-  chatter.config(function($routeProvider) {
+  pintical.config(function($routeProvider) {
     $routeProvider
 
       .when('/', {

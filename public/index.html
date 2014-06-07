@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <base href="/">
 
-    <title>Chatter</title>
+    <title>pintical</title>
 
     <link rel="stylesheet" href="libs/pure/pure.css">
     <link rel="stylesheet" href="css/style.css">
@@ -28,17 +28,18 @@
 </head>
 
 
-<body ng-app="chatter">
+<body ng-app="pintical">
     <div class="container">
         <div class="header grid">
             <div class="grid__col grid__col--3-of-4 grid__col--centered">
                 <div class="center">
-                    <h1 ng-show="header_title">{{header_title}}</h1>
-                    <h2 ng-show="header_subtitle">{{header_subtitle}}</h2>
+                    <h1 ng-class="{hidden: header_title == ''}" class="header_title">{{header_title}}</h1>
+                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle">{{header_subtitle}}</h2>
                     <hr>
                 </div>
             </div>
         </div>
+
 
 
         <div class="content" ng-view></div>

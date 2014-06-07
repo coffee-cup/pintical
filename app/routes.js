@@ -14,7 +14,7 @@ module.exports = function(app, io) {
       var pass = s_data[1];
       logger.info('room: ' + room + ':pass: ' + pass);
       isAuth(room, pass, function(err, page) {
-        if (err) handleError(err);
+        if (err) handleError(err, req, res);
 
         if (page) {
           logger.info('password for room: ' + room + ' is correct');
@@ -26,7 +26,6 @@ module.exports = function(app, io) {
       });
     });
   });
-
 
   // helper functions =============
 
@@ -162,7 +161,7 @@ module.exports = function(app, io) {
       Message.find({
         _owner: page._id
       }).sort('-created').exec(function(err, messages) {
-        // if (err) handleError(err, res);
+        if (err) handleError(err, req, res);
 
         logger.info('all messages returned for ' + req.params.name);
 

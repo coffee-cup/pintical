@@ -1,8 +1,22 @@
-<div ng-class="{hidden: isCreated}" ng-include="'views/createpage.html'"></div>
-
 <div class="pageContainer">
 
-    <div ng-class="{hidden: isAuth || !isCreated}"  class="grid">
+    <div ng-class="{hidden: isCreated}" class="createContainer">
+        <div class="grid">
+            <div class="grid__col grid__col--2-of-4 grid__col--centered center">
+                <h2>Do you want to create the page {{name}}?</h2>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="grid__col grid__col--1-of-4 grid__col--centered">
+                <form novalidate class="pure-form join-chat-form">
+                    <input type="password" ng-model="password" class="pure-input-1" placeholder="Optional Password">
+                    <button type="submit" ng-click="createPage(password)" class="pure-button pure-input-1">Create</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div ng-class="{hidden: isAuth || !isCreated}" class="grid">
         <div class="grid__col grid__col--1-of-4 grid__col--centered">
             <form ng-show="page.isPass" class="pure-form pure-form-stacked">
                 <p ns-hide="err" class="error">{{err}}</p>
@@ -21,7 +35,7 @@
         </div>
     </div>
 
-    <div class="messages">
+    <div class=="messages">
         <div ng-repeat="msg in messages" class="grid message">
             <div class="grid__col grid__col--4-of-5 grid__col--centered">
                 <blockquote class="content-quote">{{msg.body}}</blockquote>
