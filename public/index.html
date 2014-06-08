@@ -9,22 +9,8 @@
     <title>pintical</title>
 
     <link rel="stylesheet" href="libs/pure/pure.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/toast.css">
-
-
-    <!-- JS -->
-    <script src="libs/angular/angular.js"></script>
-    <script src="libs/angular-route/angular-route.js"></script>
-    <script src="libs/jquery/jquery.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-
-
-    <!-- ANGULAR CUSTOM -->
-    <script src="js/controllers/home.js"></script>
-    <script src="js/controllers/page.js"></script>
-    <script src="js/services/pageservice.js"></script>
-    <script src="js/core.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 
@@ -45,5 +31,19 @@
         <div class="content" ng-view></div>
     </div>
 </body>
+
+<!-- JS -->
+<script src="libs/angular/angular.js"></script>
+<script src="libs/angular-route/angular-route.js"></script>
+<script src="libs/jquery/jquery.js"></script>
+<script src="js/services/infinite_scroll.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+
+<!-- ANGULAR CUSTOM -->
+<script src="js/controllers/home.js"></script>
+<script src="js/controllers/page.js"></script>
+<script src="js/services/pageservice.js"></script>
+<script src="js/core.js"></script>
 
 </html>

@@ -154,13 +154,20 @@ module.exports = function(app, io) {
 
   // get all the messages for a specific page
   app.get('/api/page/:name/messages', function(req, res) {
+    var limit = req.query.limit || null;
+    var sort = req.query.sort || '-created';
+    var skip = req.query.skip || null;
+
     var pass = req.body.password || req.headers.password;
     isAuth(req.params.name, pass, function(err, page) {
       if (err) return error_handler(err, req, res);
 
-      Message.find({
-        _owner: page._id
-      }).sort('-created').exec(function(err, messages) {
+      Message
+        .find({_owner: page._id})
+        .sort(sort)
+        .limit(limit)
+        .skip(skip)
+        .exec(function(err, messages) {
         if (err) handleError(err, req, res);
 
         logger.info('all messages returned for ' + req.params.name);

@@ -13,8 +13,12 @@ angular.module('pageService.service', [])
         return $http.post('/api/page/' + name, {password: pass});
       },
 
-      getMessages : function(name, password) {
-        return $http.get('/api/page/' + name + '/messages', {headers: {'password': password}});
+      getMessages : function(name, password, limit, skip) {
+        var query = '?';
+        if (limit) query += 'limit=' + limit + '&';
+        if (skip) query += 'skip=' + skip + '&';
+
+        return $http.get('/api/page/' + name + '/messages' + query, {headers: {'password': password}});
       },
 
       createMessage : function(name, pass, body) {

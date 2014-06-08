@@ -1,7 +1,9 @@
 angular.module('homeController.controller', [])
   .controller('homeController', function($rootScope, $scope, $location, pageService) {
-    $rootScope.header_title = 'Chatter';
-    $rootScope.header_subtitle = 'Anonymous Chat';
+    $rootScope.header_title = 'Pintical';
+    $rootScope.header_subtitle = 'Anonymous Chat Board';
+    $('.header_title').show();
+    $('.header_subtitle').show();
 
     $scope.findPage = function(name) {
       $location.path('/' + name);

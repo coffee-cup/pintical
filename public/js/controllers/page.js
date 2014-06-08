@@ -6,12 +6,17 @@ angular.module('pageController.controller', [])
     $routeParams,
     pageService) {
 
+    $rootScope.header_title = '';
+    $rootScope.header_subtitle = '';
+
     var socket = io();
     socket.emit('chat message', 'hello, world!');
 
     $scope.page = null;
     $scope.name = $routeParams.name;
+    $scope.password = "";
     $scope.messages = [];
+    $scope.limit = 30;
     $scope.isAuth = false;
     $scope.isCreated = false;
     $scope.colour = "";
@@ -30,8 +35,8 @@ angular.module('pageController.controller', [])
 
       // listen for a message from the server, then add it to the messages list
       socket.on('message', function(data) {
-        console.log('got message ' + data.body);
         if (data) {
+          data.color = randomColor();
           $scope.messages.unshift(data);
           $scope.$apply();
         }
@@ -48,9 +53,6 @@ angular.module('pageController.controller', [])
       $('.header_subtitle').show();
     }
 
-    // TODO set header depending on what state of the app we are in
-    // and set the header back to the original when we leave or on create
-    // of new page
     function setHeader() {
       if ($scope.isCreated && $scope.isAuth) {
         $rootScope.header_subtitle = $routeParams.name;
@@ -61,9 +63,46 @@ angular.module('pageController.controller', [])
         showHeader();
       }else {
         $rootScope.header_title = 'Pintical';
-        $rootScope.header_subtitle = 'Anonymous Chat';
+        $rootScope.header_subtitle = 'Anonymous Chat Board';
         showHeader();
       }
+    }
+
+    function randomColor() {
+      return '#'+Math.floor(Math.random()*16777215).toString(16);
+      // return colours[Math.floor(Math.random() * colours.length)];
+    }
+
+    function loadMessages(callback) {
+      if ($scope.isAuth && $scope.isCreated) {
+        var skip = $scope.messages.length;
+
+        pageService.getMessages($routeParams.name, $scope.password, $scope.limit, skip)
+          .success(function(newmsgs) {
+
+          for(var i=0;i<newmsgs.length;i++) {
+            newmsgs[i].color = randomColor();
+          }
+
+          $scope.messages = $scope.messages.concat(newmsgs);
+
+          if (!$scope.$$phase) {
+            $scope.$apply();
+          }
+
+          if (callback) callback(null);
+        }).error(function(err) {
+          if (callback) callback(err);
+        });
+      }else {
+        if (callback) callback(null);
+      }
+    }
+
+    $scope.scrollLoadMessages = function(deferredObj) {
+      loadMessages(function(err) {
+        deferredObj.resolve();
+      });
     }
 
     pageService.getPage($routeParams.name).success(function(page) {
@@ -72,9 +111,8 @@ angular.module('pageController.controller', [])
       if (!page.isPass) {
         $scope.isAuth = true;
         setHeader();
-        pageService.getMessages($routeParams.name).success(function(messages) {
-          $scope.messages = messages;
-        });
+
+        loadMessages();
 
         joinRoom();
       }else {
@@ -89,9 +127,8 @@ angular.module('pageController.controller', [])
       }
     });
 
-    $scope.createPage = function(pass) {
-      pageService.createPage($routeParams.name, pass).success(function(page) {
-        $scope.password = pass;
+    $scope.createPage = function() {
+      pageService.createPage($routeParams.name, $scope.password).success(function(page) {
         $scope.authPage();
         $scope.page = page;
         $scope.isCreated = true;
@@ -111,30 +148,21 @@ angular.module('pageController.controller', [])
       });
     }
 
-    $scope.createMessage = function(password, body) {
+    $scope.createMessage = function(body) {
+      console.log('test');
       if (body && body != "") {
         pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
           $scope.message = "";
-          // $scope.messages.unshift(msg);
           $scope.err = "";
-          // generateColour();
         }).error(function(err) {
           $scope.err = err.message;
         });
       }
     }
 
-    // // this hasn't been completed yet
-    // function generateColour(){
-    //   var x = Math.floor((Math.random() * 5) + 1);
-    //   $('.content-quote').each(function(){
-    //   $(this).css("border-color":colours[x]);
-    // });
-    // }
-
     $scope.isEnter = function(event) {
       if (event.keyCode == 13) {
-        $scope.createMessage($scope.password, $scope.message);
+        $scope.createMessage($scope.message);
         event.preventDefault();
       }
     }

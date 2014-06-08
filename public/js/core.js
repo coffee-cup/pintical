@@ -1,6 +1,7 @@
   var pintical = angular.module('pintical',
             ['ngRoute',
             'pageService.service',
+            'infiniteScroll',
             'homeController.controller',
             'pageController.controller']);
 
