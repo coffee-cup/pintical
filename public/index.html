@@ -15,18 +15,17 @@
 
 
 <body ng-app="pintical">
-    <div class="container">
+    <div class="main-container">
         <div class="header grid">
             <div class="grid__col grid__col--3-of-4 grid__col--centered">
                 <div class="center">
-                    <h1 ng-class="{hidden: header_title == ''}" class="header_title">{{header_title}}</h1>
-                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle">{{header_subtitle}}</h2>
+                    <h1 ng-class="{hidden: header_title == ''}" class="header_title">
+                    <a href="/#/about" class="header-link">{{header_title}}</a></h1>
+                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle"><a href="/" class="header-link">{{header_subtitle}}</a></h2>
                     <hr>
                 </div>
             </div>
         </div>
-
-
 
         <div class="content" ng-view></div>
     </div>
@@ -43,6 +42,7 @@
 <!-- ANGULAR CUSTOM -->
 <script src="js/controllers/home.js"></script>
 <script src="js/controllers/page.js"></script>
+<script src="js/controllers/about.js"></script>
 <script src="js/services/pageservice.js"></script>
 <script src="js/core.js"></script>
 

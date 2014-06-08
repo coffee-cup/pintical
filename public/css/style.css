@@ -10,9 +10,19 @@ body ::selection      { background: #58FAD0; }
   display: none;
 }
 
-.remove-hyperlink {
+.main-container {
+  max-width: 1600px;
+  margin: auto;
+}
+
+.show-pages-link {
   text-decoration : none;
   color : #4C4C4C;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #323232;
 }
 
 .cursor-onmouseover {
@@ -81,4 +91,12 @@ body ::selection      { background: #58FAD0; }
 
 .enterMessage {
   padding-top: 1em;
+}
+
+.about-content {
+  margin: 0 3em;
+}
+
+.about-content-list {
+  margin: 0 2em;
 }

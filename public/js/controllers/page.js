@@ -21,9 +21,6 @@ angular.module('pageController.controller', [])
     $scope.isCreated = false;
     $scope.colour = "";
 
-    var colours = ["#FF3300", "#66FF33", "#0066FF", "#FF0066", "#00FF99"];
-    // generateColour();
-
     // setup socket.io
     var socket = io();
 

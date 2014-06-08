@@ -2,6 +2,7 @@
             ['ngRoute',
             'pageService.service',
             'infiniteScroll',
+            'aboutController.controller',
             'homeController.controller',
             'pageController.controller']);
 
@@ -12,6 +13,11 @@
       .when('/', {
         templateUrl : 'views/home.html',
         controller  : 'homeController'
+      })
+
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'aboutController'
       })
 
       .when('/:name', {
