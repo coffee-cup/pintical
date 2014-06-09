@@ -25,7 +25,7 @@ app.configure(function () {
   app.use(express.static(__dirname + '/public'));
   app.use(require('prerender-node').set('prerenderToken', '2HzURwBkqwsct8qtViw4'));
   app.use(express.logger('dev'));
-  app.use(express.favicon());
+  app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 });
