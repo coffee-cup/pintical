@@ -29,7 +29,9 @@ app.configure(function () {
   app.use(express.methodOverride());
 });
 
-// app.use(error_handler);
+// setup robots.txt
+var robots = require('robots.txt')
+app.use(robots(__dirname + '/robots.txt'))
 
 // setup server and listen on ports
 var server = app.listen(port);
