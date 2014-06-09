@@ -20,8 +20,10 @@
             <div class="grid__col grid__col--3-of-4 grid__col--centered">
                 <div class="center">
                     <h1 ng-class="{hidden: header_title == ''}" class="header_title">
-                    <a href="/#/about" class="header-link">{{header_title}}</a></h1>
-                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle"><a href="/" class="header-link">{{header_subtitle}}</a></h2>
+                        <a href="/#/about" class="header-link">{{header_title}}</a>
+                    </h1>
+                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle"><a href="/" class="header-link">{{header_subtitle}}</a>
+                    </h2>
                     <hr>
                 </div>
             </div>
@@ -45,5 +47,22 @@
 <script src="js/controllers/about.js"></script>
 <script src="js/services/pageservice.js"></script>
 <script src="js/core.js"></script>
+
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-51754450-1', 'pintical.com');
+ga('send', 'pageview');
+</script>
 
 </html>
