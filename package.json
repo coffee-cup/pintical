@@ -1,7 +1,7 @@
 {
   "name": "pintical",
   "main": "server.js",
-  "description": "anonymous wiki message application",
+  "description": "Anonymous Chat Board",
   "author": "coffeecup",
   "dependencies": {
     "express": "~3.4.4",
