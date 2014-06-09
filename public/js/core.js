@@ -23,5 +23,8 @@
       .when('/:name', {
         templateUrl : 'views/page.html',
         controller  : 'pageController'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
   });

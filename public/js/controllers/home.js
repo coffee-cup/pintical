@@ -8,6 +8,8 @@ angular.module('homeController.controller', [])
     var limit = 10;
     var PAGE_LENGTH = 100;
 
+    $(document).prop('title', 'Pintical');
+
     $scope.findPage = function(name) {
       if (name.length && name.length > PAGE_LENGTH) {
         $scope.error = 'Page name must be less than ' + PAGE_LENGTH + ' characters';

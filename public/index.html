@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <base href="/">
 
-    <title>pintical</title>
+    <title>Pintical</title>
 
     <link rel="stylesheet" href="libs/pure/pure.css">
     <link rel="stylesheet" href="css/toast.css">
@@ -51,16 +51,12 @@
         <div class="header grid">
             <div class="grid__col grid__col--3-of-4 grid__col--centered">
                 <div class="center">
-                    <h1 ng-class="{hidden: header_title != ''}" class="header_title-first">
-                        <a href="/#/about" class="header-link">{{header_title}}</a>
+                    <h1 ng-class="{hidden: header_title == ''}" class="header_title">
+                        <a href="/#/about" class="header-link" ng-bind="header_title">Pintical</a>
                     </h1>
-                    <h2 ng-class="{hidden: header_subtitle != ''}" class="header_subtitle-first"><a href="/" class="header-link">{{header_subtitle}}</a>
-                        <h1 ng-class="{hidden: header_title == ''}" class="header_title">
-                            <a href="/#/about" class="header-link">{{header_title}}</a>
-                        </h1>
-                        <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle"><a href="/" class="header-link">{{header_subtitle}}</a>
-                        </h2>
-                        <hr>
+                    <h2 ng-class="{hidden: header_subtitle == ''}" class="header_subtitle"><a href="/" class="header-link" ng-bind="header_subtitle">Anonymous Chat Board</a>
+                    </h2>
+                    <hr>
                 </div>
             </div>
         </div>

@@ -9,6 +9,8 @@ angular.module('pageController.controller', [])
     $rootScope.header_title = '';
     $rootScope.header_subtitle = '';
 
+    $(document).prop('title', $routeParams.name);
+
     var socket = io();
 
     $scope.page = null;
