@@ -1,12 +1,13 @@
 {
-  "name"         : "pintical",
-  "main"         : "server.js",
-  "description"  : "anonymous wiki message application",
-  "author"       : "coffeecup",
-  "dependencies" : {
-    "express"      : "~3.4.4",
-    "mongoose"     : "~3.6.2",
-    "winston"      : "latest",
-    "socket.io"    : "latest"
+  "name": "pintical",
+  "main": "server.js",
+  "description": "anonymous wiki message application",
+  "author": "coffeecup",
+  "dependencies": {
+    "express": "~3.4.4",
+    "mongoose": "~3.6.2",
+    "nodemailer": "^0.6.5",
+    "socket.io": "latest",
+    "winston": "latest",
   }
 }

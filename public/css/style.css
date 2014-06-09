@@ -60,6 +60,10 @@ body ::selection      { background: #58FAD0; }
   color: red;
 }
 
+.success {
+  color: green;
+}
+
  #message-area {
   resize: none;
   width: 100%;

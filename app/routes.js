@@ -1,8 +1,9 @@
 var Page = require('./models/page.js'),
   Message = require('./models/message.js'),
   Password = require('./models/password.js'),
-  logger = require('./logger'),
-  error_handler = require('./error_handling');
+  logger = require('./logger.js'),
+  error_handler = require('./error_handling.js');
+  email = require('../config/email.js');
 
 module.exports = function(app, io) {
 
@@ -288,6 +289,20 @@ module.exports = function(app, io) {
     })
   });
 
+  // send email
+  app.post('/api/email', function(req, res) {
+    var body = req.body.text;
+
+    if (body) {
+      email.sendMail(body);
+      res.send({
+        status: 'success',
+        message: 'Email successfully send'
+      })
+    }else {
+      return error_handler({message: 'You need to provide an email body', status: 403}, req, res);
+    }
+  });
 
   // frontend routes
   // route to handle all angular requests

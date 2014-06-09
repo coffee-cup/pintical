@@ -23,6 +23,10 @@ angular.module('pageService.service', [])
 
       createMessage : function(name, pass, body) {
         return $http.post('/api/page/' + name + '/message', {password: pass, body: body})
+      },
+
+      sendEmail: function(text) {
+        return $http.post('/api/email', {text: text});
       }
     }
   });

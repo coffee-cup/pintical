@@ -8,11 +8,18 @@ var error_handler = require('./app/error_handling');
 
 var app = express();
 
-// config files
-var db = require('./config/db');
+// secret variables (passwords and such)
+var secrets = require('./config/secrets');
 
 var port = process.env.PORT || 9090;
-mongoose.connect(db.url);
+
+// configure db
+if (process.env.NODE_ENV == 'production') {
+  mongoose.connect(secrets.MODULUS_DB);
+}else {
+  logger.info('connected to localhost db');
+  mongoose.connect(secrets.LOCAL_DB);
+}
 
 app.configure(function () {
   app.use(express.static(__dirname + '/public'));
