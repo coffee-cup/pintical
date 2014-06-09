@@ -7,7 +7,7 @@
             'pageController.controller']);
 
   // configure our routes
-  pintical.config(function($routeProvider) {
+  pintical.config(function($routeProvider, $locationProvider) {
     $routeProvider
 
       .when('/', {
@@ -23,8 +23,8 @@
       .when('/:name', {
         templateUrl : 'views/page.html',
         controller  : 'pageController'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
+
+      $locationProvider.html5Mode(true);
+      $locationProvider.hashPrefix('!');
   });

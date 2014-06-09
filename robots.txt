@@ -1,1 +1,4 @@
 User-agent: *
+Allow: /about
+Allow: /$
+Disallow: /*

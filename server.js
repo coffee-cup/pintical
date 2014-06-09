@@ -23,6 +23,7 @@ if (process.env.NODE_ENV == 'production') {
 
 app.configure(function () {
   app.use(express.static(__dirname + '/public'));
+  app.use(require('prerender-node').set('prerenderToken', '2HzURwBkqwsct8qtViw4'));
   app.use(express.logger('dev'));
   app.use(express.favicon());
   app.use(express.bodyParser());

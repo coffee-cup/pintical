@@ -9,6 +9,7 @@
     "nodemailer": "^0.6.5",
     "socket.io": "latest",
     "winston": "latest",
-    "robots.txt": "latest"
+    "robots.txt": "latest",
+    "prerender-node": "latest"
   }
 }
