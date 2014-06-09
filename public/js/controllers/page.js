@@ -10,7 +10,6 @@ angular.module('pageController.controller', [])
     $rootScope.header_subtitle = '';
 
     var socket = io();
-    socket.emit('chat message', 'hello, world!');
 
     $scope.page = null;
     $scope.name = $routeParams.name;
@@ -67,7 +66,6 @@ angular.module('pageController.controller', [])
 
     function randomColor() {
       return '#'+Math.floor(Math.random()*16777215).toString(16);
-      // return colours[Math.floor(Math.random() * colours.length)];
     }
 
     function loadMessages(callback) {
@@ -80,7 +78,6 @@ angular.module('pageController.controller', [])
           for(var i=0;i<newmsgs.length;i++) {
             newmsgs[i].color = randomColor();
           }
-
           $scope.messages = $scope.messages.concat(newmsgs);
 
           if (!$scope.$$phase) {
@@ -126,6 +123,11 @@ angular.module('pageController.controller', [])
 
     $scope.createPage = function() {
       pageService.createPage($routeParams.name, $scope.password).success(function(page) {
+        if (page.status && page.status == 'failure') {
+          $scope.error = page.message;
+          return;
+        }
+
         $scope.authPage();
         $scope.page = page;
         $scope.isCreated = true;
@@ -134,6 +136,9 @@ angular.module('pageController.controller', [])
 
     $scope.authPage = function() {
       pageService.getMessages($routeParams.name, $scope.password).success(function(messages) {
+        for(var i=0;i<messages.length;i++) {
+          messages[i].color = randomColor();
+        }
         $scope.messages = messages;
         $scope.isAuth = true;
 
@@ -146,7 +151,6 @@ angular.module('pageController.controller', [])
     }
 
     $scope.createMessage = function(body) {
-      console.log('test');
       if (body && body != "") {
         pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
           $scope.message = "";

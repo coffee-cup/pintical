@@ -1,8 +1,11 @@
 angular.module('pageService.service', [])
   .factory('pageService', function($http) {
     return {
-      allPages : function() {
-        return $http.get('/api/pages');
+      allPages : function(limit, skip) {
+        var query = '?';
+        if (limit) query += 'limit=' + limit + '&';
+        if (skip) query += 'skip=' + skip + '&';
+        return $http.get('/api/pages' + query);
       },
 
       getPage : function(name) {

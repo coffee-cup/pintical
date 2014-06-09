@@ -3,24 +3,32 @@
         <div class="grid">
             <div class="grid__col grid__col--1-of-4 grid__col--centered">
                 <form novalidate class="pure-form join-chat-form">
+                    <p ng-class="{hidden: !error && error != ''}" class="error">{{error}}</p>
                     <input type="text" ng-model="name" class="pure-input-1" placeholder="Page Name">
                     <button type="submit" ng-click="findPage(name)" class="pure-button pure-input-1">Join</button>
                 </form>
             </div>
         </div>
-        <div class="grid">
-            <div class="grid__col grid__col--3-of-4 grid__col--centered center">
+        <!--         <div class="grid">
+            <div class="gri_d_col grid__col--3-of-4 grid__col--centered center">
                 <div class="add-margin-top">
                     <a ng-click="allPages()" class="cursor-onmouseover">
                         <h3>Searching for a topic?</h3>
                     </a>
                 </div>
             </div>
+        </div> -->
+        <div ng-show="pages" class="grid newest-list">
+            <div class="gird__col grid__col--2-of-4 grid__col--centered center">
+                <h4>List of newest pages</h4>
+            </div>
         </div>
         <div ng-repeat="page in pages">
             <div class="grid">
-                <div class="grid__col grid__col--3-of-5 grid__col--centered center">
-                    <a ng-href="/#/{{page.name}}" class="cursor-onmouseover show-pages-link"><h4>{{page.name}}</h4>
+                <div class="grid__col grid__col--2-of-4 grid__col--centered center message">
+                    <a ng-href="/#/{{page.name}}" class="cursor-onmouseover show-pages-link">
+                        <p class="page" style="border-color: {{page.color}}"><b>{{page.name}}</b> - {{page.messages.length}} total messages</p>
+                    </a>
                 </div>
             </div>
         </div>

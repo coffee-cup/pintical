@@ -5,15 +5,32 @@ angular.module('homeController.controller', [])
     $('.header_title').show();
     $('.header_subtitle').show();
 
+    var limit = 10;
+    var PAGE_LENGTH = 100;
+
     $scope.findPage = function(name) {
-      $location.path('/' + name);
+      if (name.length && name.length > PAGE_LENGTH) {
+        $scope.error = 'Page name must be less than ' + PAGE_LENGTH + ' characters';
+      }else {
+        $location.path('/' + name);
+      }
     }
 
-    $scope.allPages = function(){
-        pageService.allPages().success(function(pages) {
+    function randomColor() {
+      return '#'+Math.floor(Math.random()*16777215).toString(16);
+    }
+
+    $scope.allPages = function() {
+        pageService.allPages(limit, null).success(function(pages) {
+
+        for (var i=0;i<pages.length;i++) {
+          pages[i].color = randomColor();
+        }
         $scope.pages = pages;
       }).error(function(err) {
         $scope.err = err.message;
       });
     }
+
+    $scope.allPages();
   });

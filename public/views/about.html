@@ -20,7 +20,7 @@
          <div class="grid">
             <div class="grid__col grid__col--3-of-5 grid__col--centered">
                 <h2 class="about-header">BETA!</h2>
-                <p class="about-content">The website is still in beta and we are actively developing it. Please let us know about any bugs or problems with the site. Please note that (in beta) all pages will probably be removed and reset as major changes occur.</p>
+                <p class="about-content">The website is still in beta and we are actively developing it. Please let us know about any bugs or problems with the site. Also note, that in beta, all pages will probably be removed and reset as major changes occur.</p>
             </div>
         </div>
         <div class="grid">
@@ -29,7 +29,7 @@
                 <form class="pure-form about-content contact-form">
                     <label ng-class="{error: error && error != ''}">{{error}}</label>
                     <label ng-class="{success: success && success != ''}">{{success}}</label>
-                    <textarea ng-model="message" ng-keypress="isEnter($event)" id="message-area" rows="3" class- "pure-input-1" placeholder="Message"></textarea>
+                    <textarea ng-model="message" ng-keypress="isEnter($event)" class="message-area" rows="5" class- "pure-input-1" placeholder="Message"></textarea>
                     <button type="submit" ng-click="sendEmail(message)" class="pure-button pure-input-1">Send</button>
                 </form>
             </div>

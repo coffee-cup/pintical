@@ -1,9 +1,11 @@
 var Page = require('./models/page.js'),
   Message = require('./models/message.js'),
   Password = require('./models/password.js'),
+  crypto = require('crypto'),
   logger = require('./logger.js'),
   error_handler = require('./error_handling.js');
-  email = require('../config/email.js');
+  email = require('../config/email.js'),
+  settings = require('../config/settings.js');
 
 module.exports = function(app, io) {
 
@@ -13,7 +15,6 @@ module.exports = function(app, io) {
       var s_data = data.split(':');
       var room = s_data[0];
       var pass = s_data[1];
-      logger.info('room: ' + room + ':pass: ' + pass);
       isAuth(room, pass, function(err, page) {
         if (err) handleError(err, req, res);
 
@@ -29,6 +30,12 @@ module.exports = function(app, io) {
   });
 
   // helper functions =============
+
+  // create a hash of the password
+  function hashPass(pass) {
+    var hash = crypto.createHash('sha256').update(pass);
+    return hash.digest('hex');
+  }
 
   // checks to see if the password is correct for the given page name
   function isAuth(name, password, callback) {
@@ -69,7 +76,7 @@ module.exports = function(app, io) {
             });
             logger.error('could not find password in the db');
             return;
-          } else if (page.isPass && pass.password != password) {
+          } else if (page.isPass && pass.password != hashPass(password)) {
             callback({
               status: 403,
               message: "The password is incorrect"
@@ -88,16 +95,20 @@ module.exports = function(app, io) {
 
   // get all the pages with no password
   app.get('/api/pages', function(req, res) {
-    Page.find({
-      isPass: false
-    })
-      .sort('-created')
-      .exec(function(err, pages) {
-        if (err) return error_handler(err, req, res);
+    var limit = req.query.limit || null;
+    var sort = req.query.sort || '-created';
+    var skip = req.query.skip || null;
 
-        logger.info('all public pages returned');
-        res.json(pages); // return all the pages in json
-      });
+    Page.find({isPass: false})
+    .sort(sort)
+    .limit(limit)
+    .skip(skip)
+    .exec(function(err, pages) {
+      if (err) return error_handler(err, req, res);
+
+      logger.info('all public pages returned');
+      res.json(pages); // return all the pages in json
+    });
   });
 
   // get a specific page
@@ -117,6 +128,17 @@ module.exports = function(app, io) {
 
   // create a specific page
   app.post('/api/page/:name', function(req, res) {
+    if (req.body.password && req.body.password.length > settings.MAX_PASSWORD_LENGTH) {
+      logger.warn('the password is to long');
+      res.send({status: 'failure', message: 'the password needs to be under ' + settings.MAX_PASSWORD_LENGTH + ' characters'});
+      return;
+    }
+    if (req.params.name.length > settings.MAX_PAGE_LENGTH) {
+      logger.warn('the page name is too long')
+      res.send({status: 'failure', message: 'The page name is too long'});
+      return;
+    }
+
     Page
       .findOne({
         name: req.params.name
@@ -138,7 +160,7 @@ module.exports = function(app, io) {
             if (req.body.password) {
               var pass = null;
               pass = new Password({
-                password: req.body.password,
+                password: hashPass(req.body.password),
                 _page: page._id
               });
             }
