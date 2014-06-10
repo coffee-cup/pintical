@@ -11,6 +11,10 @@ angular.module('homeController.controller', [])
     $(document).prop('title', 'Pintical');
 
     $scope.findPage = function(name) {
+      if (!name) {
+        $location.path('/undefinded');
+        return;
+      }
       if (name.length && name.length > PAGE_LENGTH) {
         $scope.error = 'Page name must be less than ' + PAGE_LENGTH + ' characters';
       }else {
