@@ -37,6 +37,12 @@ module.exports = function(app, io) {
     return hash.digest('hex');
   }
 
+  // checks if the given string is all alpha charaters
+  function isAlpha(s) {
+    var re = new RegExp("^[a-z]+$");
+    return re.test(s);
+    }
+
   // checks to see if the password is correct for the given page name
   function isAuth(name, password, callback) {
     Page.findOne({
@@ -136,6 +142,10 @@ module.exports = function(app, io) {
     if (req.params.name.length > settings.MAX_PAGE_LENGTH) {
       logger.warn('the page name is too long')
       res.send({status: 'failure', message: 'The page name is too long'});
+      return;
+    }else if(!isAlpha(req.params.name)) {
+      logger.warn('the page name is not made of all alpha character');
+      res.send({status: 'failure', message: 'The page name is not all alpha characters'});
       return;
     }
 

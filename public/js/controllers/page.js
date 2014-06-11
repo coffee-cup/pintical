@@ -22,6 +22,15 @@ angular.module('pageController.controller', [])
     $scope.isCreated = false;
     $scope.colour = "";
 
+    function isAlpha(s) {
+      var re = new RegExp("^[a-z]+$");
+      return re.test(s);
+    }
+
+    if (!isAlpha($routeParams.name)) {
+      $location.path('/');
+    }
+
     // setup socket.io
     var socket = io();
 

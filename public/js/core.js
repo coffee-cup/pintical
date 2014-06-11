@@ -23,6 +23,9 @@
       .when('/:name', {
         templateUrl : 'views/page.html',
         controller  : 'pageController'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
 
       $locationProvider.html5Mode(true);

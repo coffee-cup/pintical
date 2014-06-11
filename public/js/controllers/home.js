@@ -12,14 +12,21 @@ angular.module('homeController.controller', [])
 
     $scope.findPage = function(name) {
       if (!name) {
-        $location.path('/undefinded');
+        $location.path('/undefined');
         return;
       }
-      if (name.length && name.length > PAGE_LENGTH) {
+      if (!isAlpha(name)) {
+        $scope.error = 'Alpha characters only please';
+      }else if (name.length && name.length > PAGE_LENGTH) {
         $scope.error = 'Page name must be less than ' + PAGE_LENGTH + ' characters';
       }else {
         $location.path('/' + name);
       }
+    }
+
+    function isAlpha(s) {
+      var re = new RegExp("^[a-z]+$");
+      return re.test(s);
     }
 
     function randomColor() {
