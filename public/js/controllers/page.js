@@ -23,7 +23,7 @@ angular.module('pageController.controller', [])
     $scope.colour = "";
 
     function isAlpha(s) {
-      var re = new RegExp("^[a-z]+$");
+      var re = new RegExp("^[a-zA-Z0-9]+$");
       return re.test(s);
     }
 

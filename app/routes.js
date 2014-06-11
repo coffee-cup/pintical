@@ -39,7 +39,7 @@ module.exports = function(app, io) {
 
   // checks if the given string is all alpha charaters
   function isAlpha(s) {
-    var re = new RegExp("^[a-z]+$");
+    var re = new RegExp('^[a-zA-Z0-9]+');
     return re.test(s);
     }
 
