@@ -83,6 +83,7 @@ body ::selection      { background: #58FAD0; }
 
 .messages {
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .page {
