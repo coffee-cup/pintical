@@ -6,14 +6,14 @@ angular.module('homeController.controller', [])
 
     var limit = 20;
     var PAGE_LENGTH = 100;
-    var letter_change = 8000;
+    var letter_change = 5000;
 
     $(document).prop('title', 'Pintical');
 
     // setup socket.io
     var socket = io();
 
-    socket.emit('public:::pages', 'random data');
+    // socket.emit('public:::pages', 'random data');
 
     socket.on('page', function(data) {
       console.log('test');

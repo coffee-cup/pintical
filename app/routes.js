@@ -233,6 +233,8 @@ module.exports = function(app, io) {
         _owner: page._id
       });
 
+      logger.info(req.body.body);
+
       // push the message onto the page
       page.messages.push(msg);
 

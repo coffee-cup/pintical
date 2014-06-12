@@ -161,7 +161,9 @@ angular.module('pageController.controller', [])
 
     $scope.createMessage = function(body) {
       if (body && body != "") {
-
+        var converter = new Showdown.converter();
+        body = converter.makeHtml(body);
+        console.log(body);
         pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
           $scope.message = "";
           $scope.err = "";
