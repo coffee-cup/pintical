@@ -11,7 +11,7 @@ angular.module('homeController.controller', [])
 
     $scope.findPage = function(name) {
       if (!name) {
-        $location.path('/undefined');
+        $location.path('/about');
         return;
       }
       if (!isAlpha(name)) {
