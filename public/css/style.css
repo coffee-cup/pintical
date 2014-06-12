@@ -146,5 +146,5 @@ body ::selection      { background: #58FAD0; }
 }
 
 .content-body img, .preview img {
-  height: 200px;
+  max-height: 200px;
 }

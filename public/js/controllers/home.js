@@ -46,9 +46,11 @@ angular.module('homeController.controller', [])
       return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
 
-    setInterval(function() {
+    function colorLetter() {
       $('.header_letter').css('background-color', randomColor());
-    }, letter_change);
+      setTimeout(colorLetter, letter_change);
+    }
+    setTimeout(colorLetter, letter_change);
 
     $scope.allPages = function() {
         pageService.allPages(limit, null).success(function(pages) {
