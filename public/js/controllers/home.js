@@ -1,9 +1,8 @@
 angular.module('homeController.controller', [])
   .controller('homeController', function($rootScope, $scope, $location, pageService) {
-    $rootScope.header_title = 'Pintical';
     $rootScope.header_subtitle = 'Anonymous Chat Board';
-    $('.header_title').show();
     $('.header_subtitle').show();
+    $('.header_title').show();
 
     var limit = 10;
     var PAGE_LENGTH = 100;

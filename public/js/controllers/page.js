@@ -6,8 +6,8 @@ angular.module('pageController.controller', [])
     $routeParams,
     pageService) {
 
-    $rootScope.header_title = '';
-    $rootScope.header_subtitle = '';
+    $('.header_title').hide();
+    $rootScope.header_subtitle = $routeParams.name;
 
     $(document).prop('title', $routeParams.name);
 
