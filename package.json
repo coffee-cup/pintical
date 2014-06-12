@@ -10,6 +10,7 @@
     "socket.io": "latest",
     "winston": "latest",
     "robots.txt": "latest",
-    "prerender-node": "latest"
+    "prerender-node": "latest",
+    "pagedown": "latest"
   }
 }

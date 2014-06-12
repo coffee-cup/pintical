@@ -15,13 +15,13 @@ angular.module('homeController.controller', [])
 
     // socket.emit('public:::pages', 'random data');
 
-    socket.on('page', function(data) {
-      console.log('test');
-    });
+    // socket.on('page', function(data) {
+    //   console.log('test');
+    // });
 
-    socket.on('message', function(data) {
-      console.log('test');
-    });
+    // socket.on('message', function(data) {
+    //   console.log('test');
+    // });
 
     $scope.findPage = function(name) {
       if (!name) {

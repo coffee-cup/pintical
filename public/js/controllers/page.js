@@ -4,6 +4,7 @@ angular.module('pageController.controller', [])
     $http,
     $location,
     $routeParams,
+    $sce,
     pageService) {
 
     $('.header_title').hide();
@@ -19,6 +20,8 @@ angular.module('pageController.controller', [])
     $scope.isAuth = false;
     $scope.isCreated = false;
     $scope.colour = "";
+
+    var converter = new Markdown.getSanitizingConverter();
 
     function isAlpha(s) {
       var re = new RegExp("^[a-zA-Z0-9]+$");
@@ -68,6 +71,14 @@ angular.module('pageController.controller', [])
       }else {
         $rootScope.header_subtitle = 'Anonymous Chat Board';
         showHeader();
+      }
+    }
+
+    $scope.convertBodyToHtml = function(body) {
+      if (body) {
+        return $sce.trustAsHtml(converter.makeHtml(body));
+      }else {
+        return $sce.trustAsHtml('');
       }
     }
 
@@ -160,12 +171,9 @@ angular.module('pageController.controller', [])
     }
 
     $scope.createMessage = function(body) {
+      $scope.message = "";
       if (body && body != "") {
-        var converter = new Showdown.converter();
-        body = converter.makeHtml(body);
-        console.log(body);
         pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
-          $scope.message = "";
           $scope.err = "";
         }).error(function(err) {
           $scope.err = err.message;
@@ -173,10 +181,10 @@ angular.module('pageController.controller', [])
       }
     }
 
-    $scope.isEnter = function(event) {
-      if (event.keyCode == 13) {
-        $scope.createMessage($scope.message);
-        event.preventDefault();
-      }
-    }
+    // $scope.isEnter = function(event) {
+    //   if (event.keyCode == 13) {
+    //     $scope.createMessage($scope.message);
+    //     event.preventDefault();
+    //   }
+    // }
   });

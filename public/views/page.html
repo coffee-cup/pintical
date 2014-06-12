@@ -30,16 +30,22 @@
     <div ng-class="{hidden: !isAuth || !isCreated}" class="grid enterMessage">
         <div class="grid__col grid__col--2-of-4 grid__col--centered">
             <form class="pure-form join-chat-form">
-                <textarea ng-model="message" ng-keypress="isEnter($event)" rows="3" class="pure-input-1 message-area" placeholder="Message"></textarea>
+                <textarea ng-model="message" ng-keypress="isEnter($event)" rows="5" class="pure-input-1 message-area" placeholder="Message"></textarea>
                 <button type="submit" ng-click="createMessage(message)" class="pure-button pure-input-1">Submit</button>
             </form>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="grid__col grid__col--4-of-5 grid__col--centered">
+            <div class="preview" ng-class="{hidden: !message || message == ''}" ng-bind-html="convertBodyToHtml(message)"></div>
         </div>
     </div>
 
     <div infinite-scroll="scrollLoadMessages" class="messages">
         <div ng-repeat="msg in messages" class="grid message">
             <div class="grid__col grid__col--4-of-5 grid__col--centered">
-                <div class="content-body" style="border-color: {{msg.color}}">{{msg.body}}</div>
+                <div class="content-body" style="border-color: {{msg.color}}" ng-bind-html="convertBodyToHtml(msg.body)"></div>
             </div>
         </div>
     </div>

@@ -5,10 +5,12 @@ var Page = require('./models/page.js'),
   logger = require('./logger.js'),
   error_handler = require('./error_handling.js');
   email = require('../config/email.js'),
+  pagedown = require('pagedown'),
   settings = require('../config/settings.js');
 
 module.exports = function(app, io) {
 
+  var converter = pagedown.getSanitizingConverter();
   var public_page_room = 'public:::pages';
 
   // handle incoming connections from clients
@@ -18,7 +20,7 @@ module.exports = function(app, io) {
       var room = s_data[0];
       var pass = s_data[1];
       isAuth(room, pass, function(err, page) {
-        if (err) handleError(err, req, res);
+        if (err) {logger.error(err); return;}
 
         if (page) {
           logger.info('password for room: ' + room + ' is correct');
@@ -228,12 +230,12 @@ module.exports = function(app, io) {
     isAuth(req.params.name, pass, function(err, page) {
       if (err) return error_handler(err, req, res);
 
+      var mark = converter.makeHtml(req.body.body);
+
       var msg = new Message({
-        body: req.body.body,
+        body: mark,
         _owner: page._id
       });
-
-      logger.info(req.body.body);
 
       // push the message onto the page
       page.messages.push(msg);
