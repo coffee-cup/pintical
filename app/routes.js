@@ -9,6 +9,8 @@ var Page = require('./models/page.js'),
 
 module.exports = function(app, io) {
 
+  var public_page_room = 'public:::pages';
+
   // handle incoming connections from clients
   io.sockets.on('connection', function(socket) {
     socket.on('room', function(data) {
@@ -26,6 +28,11 @@ module.exports = function(app, io) {
           logger.info('password for room: ' + room + ' is incorrect');
         }
       });
+    });
+
+    socket.on(public_page_room, function(data) {
+      socket.join(public_page_room);
+      logger.info('user connected to ' + public_page_room);
     });
   });
 
@@ -102,7 +109,7 @@ module.exports = function(app, io) {
   // get all the pages with no password
   app.get('/api/pages', function(req, res) {
     var limit = req.query.limit || null;
-    var sort = req.query.sort || '-created';
+    var sort = req.query.sort || '-messagesLength';
     var skip = req.query.skip || null;
 
     Page.find({isPass: false})
@@ -112,8 +119,8 @@ module.exports = function(app, io) {
     .exec(function(err, pages) {
       if (err) return error_handler(err, req, res);
 
-      logger.info('all public pages returned');
       res.json(pages); // return all the pages in json
+      logger.info('all public pages returned');
     });
   });
 
@@ -176,6 +183,10 @@ module.exports = function(app, io) {
             }
             if (pass) {
               pass.save();
+            }
+            if (!page.isPass) {
+              io.sockets.in(public_page_room).emit('page', page);
+              logger.info('emitted page to clients in ' + public_page_room);
             }
             res.json(page);
           });

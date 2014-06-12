@@ -6,9 +6,22 @@ angular.module('homeController.controller', [])
 
     var limit = 20;
     var PAGE_LENGTH = 100;
-    var letter_change = 5000;
+    var letter_change = 8000;
 
     $(document).prop('title', 'Pintical');
+
+    // setup socket.io
+    var socket = io();
+
+    socket.emit('public:::pages', 'random data');
+
+    socket.on('page', function(data) {
+      console.log('test');
+    });
+
+    socket.on('message', function(data) {
+      console.log('test');
+    });
 
     $scope.findPage = function(name) {
       if (!name) {
@@ -33,9 +46,9 @@ angular.module('homeController.controller', [])
       return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
 
-     setInterval(function() {
+    setInterval(function() {
       $('.header_letter').css('background-color', randomColor());
-     }, letter_change);
+    }, letter_change);
 
     $scope.allPages = function() {
         pageService.allPages(limit, null).success(function(pages) {

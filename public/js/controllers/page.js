@@ -11,8 +11,6 @@ angular.module('pageController.controller', [])
 
     $(document).prop('title', $routeParams.name);
 
-    var socket = io();
-
     $scope.page = null;
     $scope.name = $routeParams.name;
     $scope.password = "";
