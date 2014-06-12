@@ -1,6 +1,5 @@
 angular.module('aboutController.controller', [])
   .controller('aboutController', function($rootScope, $scope, pageService) {
-    $rootScope.header_title = 'Pintical';
     $rootScope.header_subtitle = 'About';
     $('.header_title').show();
     $('.header_subtitle').show();

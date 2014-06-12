@@ -35,8 +35,10 @@ body ::selection      { background: #58FAD0; }
 }
 
 .header h1 {
+  font-family: 'Roboto', sans-serif;;
   font-weight: 100;
-  font-size: 800%;
+  font-size: 900%;
+  margin-bottom: 0.1em;
 }
 
 .add-margin-top {
@@ -46,6 +48,10 @@ body ::selection      { background: #58FAD0; }
 .header h2 {
   font-weight: 100;
   font-size: 200%;
+}
+
+.header_letter {
+  background-color: red;
 }
 
 .join-input {
@@ -114,6 +120,6 @@ body ::selection      { background: #58FAD0; }
   margin: 0 2em;
 }
 
-.newest-list {
-  margin-top: 4em;
+.front-list {
+  margin-bottom: 5em;
 }
