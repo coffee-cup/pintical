@@ -17,8 +17,8 @@ var port = process.env.PORT || 9090;
 if (process.env.NODE_ENV == 'production') {
   mongoose.connect(secrets.MODULUS_DB);
 }else {
-  logger.info('connected to localhost db');
   mongoose.connect(secrets.LOCAL_DB);
+  logger.info('connected to localhost db');
 }
 
 app.configure(function () {

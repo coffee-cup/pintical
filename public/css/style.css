@@ -123,3 +123,7 @@ body ::selection      { background: #58FAD0; }
 .front-list {
   margin-bottom: 4em;
 }
+
+.about-email {
+  margin-bottom: 3em;
+}

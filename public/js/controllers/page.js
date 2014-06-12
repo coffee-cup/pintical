@@ -64,10 +64,8 @@ angular.module('pageController.controller', [])
         hideHeader();
       } else if ($scope.isCreated && !$scope.isAuth) {
         $rootScope.header_subtitle = $routeParams.name;
-        $rootScope.header_title = 'Pintical';
         showHeader();
       }else {
-        $rootScope.header_title = 'Pintical';
         $rootScope.header_subtitle = 'Anonymous Chat Board';
         showHeader();
       }
@@ -103,9 +101,11 @@ angular.module('pageController.controller', [])
     }
 
     $scope.scrollLoadMessages = function(deferredObj) {
-      loadMessages(function(err) {
-        deferredObj.resolve();
-      });
+      if ($location.path() != '/' && $routeParams.name) {
+        loadMessages(function(err) {
+          deferredObj.resolve();
+        });
+      }
     }
 
     pageService.getPage($routeParams.name).success(function(page) {
@@ -161,6 +161,7 @@ angular.module('pageController.controller', [])
 
     $scope.createMessage = function(body) {
       if (body && body != "") {
+
         pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
           $scope.message = "";
           $scope.err = "";
