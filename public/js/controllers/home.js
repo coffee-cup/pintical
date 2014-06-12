@@ -4,8 +4,9 @@ angular.module('homeController.controller', [])
     $('.header_subtitle').show();
     $('.header_title').show();
 
-    var limit = 10;
+    var limit = 20;
     var PAGE_LENGTH = 100;
+    var letter_change = 5000;
 
     $(document).prop('title', 'Pintical');
 
@@ -31,6 +32,10 @@ angular.module('homeController.controller', [])
     function randomColor() {
       return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
+
+     setInterval(function() {
+      $('.header_letter').css('background-color', randomColor());
+     }, letter_change);
 
     $scope.allPages = function() {
         pageService.allPages(limit, null).success(function(pages) {

@@ -23,12 +23,15 @@
                 <h4>List of newest public pages</h4>
             </div>
         </div>
-        <div class="front-list" ng-repeat="page in pages">
-            <div class="grid">
-                <div class="grid__col grid__col--2-of-4 grid__col--centered center message">
-                    <a ng-href="/{{page.name}}" class="cursor-onmouseover show-pages-link">
-                        <p class="page" style="border-color: {{page.color}}"><b>{{page.name}}</b> - {{page.messages.length}} total messages</p>
-                    </a>
+
+        <div class="front-list">
+            <div ng-repeat="page in pages">
+                <div class="grid">
+                    <div class="grid__col grid__col--2-of-4 grid__col--centered center message">
+                        <a ng-href="/{{page.name}}" class="cursor-onmouseover show-pages-link">
+                            <p class="page" style="border-color: {{page.color}}"><b>{{page.name}}</b> - {{page.messages.length}} total messages</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

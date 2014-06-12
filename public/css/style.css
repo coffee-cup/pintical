@@ -51,7 +51,7 @@ body ::selection      { background: #58FAD0; }
 }
 
 .header_letter {
-  background-color: red;
+  background-color: #58FAD0;
 }
 
 .join-input {
@@ -121,5 +121,5 @@ body ::selection      { background: #58FAD0; }
 }
 
 .front-list {
-  margin-bottom: 5em;
+  margin-bottom: 4em;
 }
