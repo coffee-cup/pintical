@@ -11,7 +11,7 @@ angular.module('homeController.controller', [])
     $(document).prop('title', 'Pintical');
 
     // setup socket.io
-    var socket = io();
+    // var socket = io();
 
     // socket.emit('public:::pages', 'random data');
 

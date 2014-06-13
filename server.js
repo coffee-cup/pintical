@@ -39,7 +39,12 @@ var server = app.listen(port);
 var io = require('socket.io').listen(server);
 
 // routes
-require('./app/routes')(app, io);
+// require('./app/routes')(app, io);
+
+app.get('*', function(req, res) {
+  logger.info('request for html');
+  res.sendfile('./public/index.html'); // load our public/index.html file
+});
 
 logger.info('Magic happens on port ' + port);
 // console.log('Magic happens on port ' + port);

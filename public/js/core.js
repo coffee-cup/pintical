@@ -11,22 +11,26 @@
     $routeProvider
 
       .when('/', {
-        templateUrl : 'views/home.html',
+        templateUrl : 'views/down.html',
         controller  : 'homeController'
       })
 
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'aboutController'
-      })
-
-      .when('/:name', {
-        templateUrl : 'views/page.html',
-        controller  : 'pageController'
-      })
       .otherwise({
         redirectTo: '/'
       });
+
+      // .when('/about', {
+      //   templateUrl: 'views/about.html',
+      //   controller: 'aboutController'
+      // })
+
+      // .when('/:name', {
+      //   templateUrl : 'views/page.html',
+      //   controller  : 'pageController'
+      // })
+      // .otherwise({
+      //   redirectTo: '/'
+      // });
 
       $locationProvider.html5Mode(true);
       $locationProvider.hashPrefix('!');
