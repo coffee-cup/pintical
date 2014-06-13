@@ -226,6 +226,11 @@ module.exports = function(app, io) {
 
   // create a new message for the given page
   app.post('/api/page/:name/message', function(req, res) {
+    if (!req.body.body || req.body.body == '') {
+      logger.warn('you need to provide a message');
+      res.send({status: 'failure', message: 'you need to provide a message body'});
+      return;
+    }
     var pass = req.body.password || req.headers.password;
     isAuth(req.params.name, pass, function(err, page) {
       if (err) return error_handler(err, req, res);
