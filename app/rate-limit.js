@@ -15,7 +15,7 @@ var clients   = {},
         every:         0
       },
       normal: {
-        totalRequests: 140,
+        totalRequests: 130,
         every:         (60 * 60 * 1000) / 2
       }
     };
