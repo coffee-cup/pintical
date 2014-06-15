@@ -42,7 +42,7 @@ var server = app.listen(port);
 var io = require('socket.io').listen(server);
 
 // routes
-// require('./app/routes')(app, io);
+require('./app/routes')(app, io);
 
 app.get('*', function(req, res) {
   logger.info('request for html');
@@ -50,5 +50,4 @@ app.get('*', function(req, res) {
 });
 
 logger.info('Magic happens on port ' + port);
-// console.log('Magic happens on port ' + port);
 exports = module.exports = app;
