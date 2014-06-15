@@ -31,4 +31,4 @@ node_modules
 public/libs
 
 # config file (might be some import stuff that shouldn't be shared in here)
-config/settings.js
+config/secrets.js

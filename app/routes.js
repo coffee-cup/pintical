@@ -255,12 +255,8 @@ module.exports = function(app, io) {
         msg.save(function(err) {
           if (err) return error_handler(err, req, res);
 
-<<<<<<< HEAD
-          logger.info('new message created for ' + req.params.name);
-=======
-        io.sockets.in(req.params.name).emit('message ' + req.params.name, msg);
-        logger.info('emited message to clients in room ' + req.params.name);
->>>>>>> master
+          io.sockets.in(req.params.name).emit('message ' + req.params.name, msg);
+          logger.info('emited message to clients in room ' + req.params.name);
 
           io.sockets.in(req.params.name).emit('message', msg);
           logger.info('emited message to clients in room ' + req.params.name);
