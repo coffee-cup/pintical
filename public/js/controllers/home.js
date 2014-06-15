@@ -4,7 +4,7 @@ angular.module('homeController.controller', [])
     $('.header_subtitle').show();
     $('.header_title').show();
 
-    var limit = 20;
+    var limit = 30;
     var PAGE_LENGTH = 100;
     var letter_change = 5000;
 
@@ -60,7 +60,11 @@ angular.module('homeController.controller', [])
         }
         $scope.pages = pages;
       }).error(function(err) {
-        $scope.err = err.message;
+        if (err == 'You have sent to many requests and have been banned') {
+          $scope.err = err;
+        }else {
+          $scope.err = err.message;
+        }
       });
     }
 

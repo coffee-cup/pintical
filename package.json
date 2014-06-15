@@ -4,13 +4,15 @@
   "description": "Anonymous Chat Board",
   "author": "coffeecup",
   "dependencies": {
+    "connect-ratelimit": "0.0.6",
     "express": "~3.4.4",
+    "limiter": "^1.0.5",
     "mongoose": "~3.6.2",
     "nodemailer": "^0.6.5",
-    "socket.io": "latest",
-    "winston": "latest",
-    "robots.txt": "latest",
+    "pagedown": "latest",
     "prerender-node": "latest",
-    "pagedown": "latest"
+    "robots.txt": "latest",
+    "socket.io": "latest",
+    "winston": "latest"
   }
 }

@@ -1,8 +1,8 @@
 // modules
-var express       = require('express');
-var mongoose      = require('mongoose');
-var logger        = require('./app/logger');
-var error_handler = require('./app/error_handling');
+var express  = require('express');
+var mongoose = require('mongoose');
+var logger   = require('./app/logger.js');
+var limiter  = require('./app/rate-limit.js');
 
 // configuration
 
@@ -29,6 +29,9 @@ app.configure(function () {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 });
+
+app
+  .use(limiter());
 
 // setup robots.txt
 var robots = require('robots.txt')

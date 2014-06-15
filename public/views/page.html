@@ -9,6 +9,7 @@
         <div class="grid">
             <div class="grid__col grid__col--1-of-4 grid__col--centered">
                 <form novalidate class="pure-form join-chat-form">
+                    <label class="error" ng-model="err"></label>
                     <p ng-class="{hidden: !error && error != ''}" class="error">{{error}}</p>
                     <input type="password" ng-model="password" class="pure-input-1" placeholder="Optional Password">
                     <button type="submit" ng-click="createPage()" class="pure-button pure-input-1">Create</button>
@@ -20,6 +21,7 @@
     <div ng-class="{hidden: isAuth || !isCreated}" class="grid">
         <div class="grid__col grid__col--1-of-4 grid__col--centered">
             <form ng-show="page.isPass" class="pure-form pure-form-stacked">
+                <label class="error" ng-model="err"></label>
                 <p ns-hide="err" class="error">{{err}}</p>
                 <input id="password" ng-model="password" type="password" class="pure-input-1" placeholder="Password">
                 <button type="submit" ng-click="authPage()" class="pure-button pure-input-1">Enter</button>
@@ -30,6 +32,7 @@
     <div ng-class="{hidden: !isAuth || !isCreated}" class="grid enterMessage">
         <div class="grid__col grid__col--2-of-4 grid__col--centered">
             <form class="pure-form join-chat-form">
+                <label class="error" ng-model="err"></label>
                 <textarea ng-model="message" ng-keypress="isEnter($event)" rows="5" class="pure-input-1 message-area" placeholder="Message"></textarea>
                 <button type="submit" ng-click="createMessage(message)" class="pure-button pure-input-1">Submit</button>
             </form>

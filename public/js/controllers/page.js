@@ -151,6 +151,10 @@ angular.module('pageController.controller', [])
         $scope.authPage();
         $scope.page = page;
         $scope.isCreated = true;
+      }).error(function(err) {
+        if (err == 'You have sent to many requests and have been banned') {
+          document.write(err);
+        }
       });
     };
 
@@ -176,7 +180,12 @@ angular.module('pageController.controller', [])
         pageService.createMessage($routeParams.name, $scope.password, body).success(function(msg) {
           $scope.err = "";
         }).error(function(err) {
-          $scope.err = err.message;
+          if (err == 'You have sent to many requests and have been banned') {
+            $scope.err = err;
+            console.log(err);
+          }else {
+            $scope.err = err.message;
+          }
         });
       }
     }
