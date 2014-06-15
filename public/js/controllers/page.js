@@ -39,10 +39,11 @@ angular.module('pageController.controller', [])
       if (!pass) {
         pass = '';
       }
+
       socket.emit('room', $routeParams.name + ':' + pass);
 
       // listen for a message from the server, then add it to the messages list
-      socket.on('message', function(data) {
+      socket.on('message ' + $routeParams.name, function(data) {
         if (data) {
           data.color = randomColor();
           $scope.messages.unshift(data);

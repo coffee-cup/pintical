@@ -32,10 +32,10 @@ module.exports = function(app, io) {
       });
     });
 
-    socket.on(public_page_room, function(data) {
-      socket.join(public_page_room);
-      logger.info('user connected to ' + public_page_room);
-    });
+    // socket.on(public_page_room, function(data) {
+    //   socket.join(public_page_room);
+    //   logger.info('user connected to ' + public_page_room);
+    // });
   });
 
   // helper functions =============
@@ -255,7 +255,12 @@ module.exports = function(app, io) {
         msg.save(function(err) {
           if (err) return error_handler(err, req, res);
 
+<<<<<<< HEAD
           logger.info('new message created for ' + req.params.name);
+=======
+        io.sockets.in(req.params.name).emit('message ' + req.params.name, msg);
+        logger.info('emited message to clients in room ' + req.params.name);
+>>>>>>> master
 
           io.sockets.in(req.params.name).emit('message', msg);
           logger.info('emited message to clients in room ' + req.params.name);
