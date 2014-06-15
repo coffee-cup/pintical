@@ -235,29 +235,37 @@ module.exports = function(app, io) {
     isAuth(req.params.name, pass, function(err, page) {
       if (err) return error_handler(err, req, res);
 
-      var mark = converter.makeHtml(req.body.body);
+      Message.findOne({_owner: page._id}).limit(1).sort('-created').exec(function(err, item) {
+        var mark = converter.makeHtml(req.body.body);
 
-      var msg = new Message({
-        body: mark,
-        _owner: page._id
-      });
+        if (item && item.body == mark) {
+          logger.warn('the same message to same page was sent');
+          res.send({stat: 'failure', message: 'please do not send a duplicate message'}, 403);
+          return;
+        }
 
-      // push the message onto the page
-      page.messages.push(msg);
+        var msg = new Message({
+          body: mark,
+          _owner: page._id
+        });
 
-      msg.save(function(err) {
-        if (err) return error_handler(err, req, res);
+        // push the message onto the page
+        page.messages.push(msg);
 
-        logger.info('new message created for ' + req.params.name);
+        msg.save(function(err) {
+          if (err) return error_handler(err, req, res);
 
-        io.sockets.in(req.params.name).emit('message', msg);
-        logger.info('emited message to clients in room ' + req.params.name);
+          logger.info('new message created for ' + req.params.name);
 
-        // save the page
-        page.save();
+          io.sockets.in(req.params.name).emit('message', msg);
+          logger.info('emited message to clients in room ' + req.params.name);
 
-        // send back the new message
-        res.json(msg);
+          // save the page
+          page.save();
+
+          // send back the new message
+          res.json(msg);
+        });
       });
     });
   });

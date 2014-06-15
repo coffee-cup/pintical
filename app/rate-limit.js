@@ -1,4 +1,5 @@
 var logger = require('./logger.js');
+var settings = require('../config/settings.js');
 var Blacklist = require('./models/blacklist.js');
 
 var clients   = {},
@@ -15,8 +16,8 @@ var clients   = {},
         every:         0
       },
       normal: {
-        totalRequests: 130,
-        every:         (60 * 60 * 1000) / 2
+        totalRequests: settings.MAX_REQUESTS,
+        every:         settings.TIME_FOR_REQUEST_RESET
       }
     };
 

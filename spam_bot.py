@@ -4,8 +4,8 @@ import json
 num_requests = 150
 
 def sendMessage():
-  url = 'http://localhost:9090/api/page/hello/message'
-  payload = {'body': 'ggggggg'}
+  url = 'http://pintical.com/api/page/test/message'
+  payload = {'body': 'test', 'password': 'coffee'}
   headers = {'content-type': 'application/json'}
   r = requests.post(url, data=json.dumps(payload), headers=headers)
   print r.text
