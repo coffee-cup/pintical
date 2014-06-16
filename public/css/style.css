@@ -123,6 +123,7 @@ body ::selection      { background: #58FAD0; }
   padding: 1em 1.5em;
   margin-top: 1em;
   overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 .content-body {
