@@ -244,6 +244,12 @@ module.exports = function(app, io) {
           return;
         }
 
+        if (mark.length > settings.MAX_MESSAGE_LENGTH) {
+          logger.warn('message is too long');
+          res.send({stat: 'failure', message: 'please keep message under ' + settings.MAX_MESSAGE_LENGTH + ' characters'}, 403);
+          return;
+        }
+
         var msg = new Message({
           body: mark,
           _owner: page._id
