@@ -12,5 +12,15 @@ We wanted to create a place, that is completly anonymous, where you can post to 
 
 No personal information is stored on our servers. All we know is that this messages was posted to that page.
 
+####Chat
+![page screenshot](https://raw.githubusercontent.com/coffee-cup/pintical/master/screenshots/page_screenshot.png)
+
+####Home
+![page screenshot](https://raw.githubusercontent.com/coffee-cup/pintical/master/screenshots/homepage_screenshot.png)
+
+####About
+![page screenshot](https://raw.githubusercontent.com/coffee-cup/pintical/master/screenshots/about_screenshot.png)
+
 ###Our Future
-This is not a professional project by any means. It is a fun side project that we hope to build on. We will continue to update the website for as long as we enjoy doing it.
+This was just a side project I started with a friend of mine. The site is currently down as I don't want to pay for it.
+Will most likly stay this way.
